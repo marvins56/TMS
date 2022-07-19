@@ -1,0 +1,141 @@
+﻿@model IEnumerable<TMS.Models.UsersTable>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title">
+                    ALL USERS
+
+                    @*<a href="@Url.Action("Create","Tasks")" class="btn btn-social-icon btn-outline-primary float-right">
+                            <i class="fa-solid fa-plus fa-4x pt-3"></i>
+                        </a>*@
+                </p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="display expandable-table" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Username)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Email)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.DOB)
+                                        </th>
+                                        @*<th>
+                                                @Html.DisplayNameFor(model => model.Password)
+                                            </th>*@
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IsEmailVerified)
+                                        </th>
+                                        @*<th>
+                                                @Html.DisplayNameFor(model => model.ActivationCode)
+                                            </th>*@
+                                        @*<th>
+                                                @Html.DisplayNameFor(model => model.ResetPasswordCode)
+                                            </th>*@
+                                        @*<th>
+                                                @Html.DisplayNameFor(model => model.UnitId)
+                                            </th>*@
+                                        @*<th>
+                                                @Html.DisplayNameFor(model => model.ProfileImage)
+                                            </th>*@
+                                     
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Username)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DOB)
+                                            </td>
+                                            @*<td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>*@
+                                            <td>
+                                                @if (item.IsEmailVerified == true)
+                                                {
+                                                    <button class=" btn badge-success">  Verified</button>
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn badge-warning text-white">  Pending verification </button>
+                                                }
+
+                                            </td>
+                                            @*<td>
+            @Html.DisplayFor(modelItem => item.ActivationCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResetPasswordCode)
+        </td>*@
+                                            @*<td>
+            @Html.DisplayFor(modelItem => item.UnitId)
+        </td>*@
+
+                                            @*<td>
+            @Html.DisplayFor(modelItem => item.ProfileImage)
+        </td>*@
+
+                                            @*<td>
+                                                @if (Session["nouserole"] != null)
+                                                {
+                                                    <p class=" btn btn-outline-success">@Session["nouserole"]</p>
+                                                }
+                                                else
+                                                {
+                                            <p class="btn btn-outline-danger text-white">@Session["nouserole"]</p>
+                                                }
+
+                                            </td>*@
+
+                                            <td>
+                                                @*<a href="@Url.Action("Edit", "Users", new {id = item.Userid })" class="btn btn-inverse-primary">
+                                                    <i class="fa-solid fa-pen-to-square   "></i>
+
+                                                </a>*@
+                                                <a href="@Url.Action("Details", "Users", new { id = item.Userid })" class="btn btn-inverse-success">
+                                                    <i class="fa-solid fa-eye "></i>
+
+                                                </a>
+                                           
+                                                    <a href="@Url.Action("Userperformance", "Users", new { sessionid = item.Userid })" class="btn btn-inverse-primary">
+                                                        <i class="fa-solid fa-chart-pie"></i>
+                                                    </a>
+                                               
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+

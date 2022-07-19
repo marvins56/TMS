@@ -1,0 +1,101 @@
+﻿@model IEnumerable<TMS.Models.PersonalToDoListTable>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="jumbotron text-center">
+    <h1 class="display-4">PERSONAL TODOLIST</h1>
+    <p class="lead ">Allows you track your daily progress and activities to accomplish</p>
+
+</div>
+
+
+<div class="row">
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title">
+                    Advanced Table     <a href="@Url.Action("Create","PersonalToDoList")" class="btn btn-social-icon btn-outline-primary float-right">
+                        <i class="fa-solid fa-plus fa-4x pt-3"></i>
+
+                    </a>
+                </p>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table  class="display expandable-table" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.UserName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TaskName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TaskFeedback)
+                                        </th>
+                                        <th class="col-span-2"> ACTIONS</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="flex">
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="">
+                                                @Html.DisplayFor(modelItem => item.UserName)
+                                            </td>
+                                            <td class="">
+                                                @Html.DisplayFor(modelItem => item.TaskName)
+                                            </td>
+                                            <td class="">
+                                                @Html.DisplayFor(modelItem => item.TaskFeedback)
+                                            </td>
+                                            <td>
+
+                                                <a class=" btn btn-outline-primary btn-social-icon  " href="@Url.Action("Edit", "PersonalToDoList", new { id = item.PToDoListId })">
+                                                    <i class="fa-solid fa-pen-to-square  p-2 mt-2"></i>
+
+                                                </a>
+                                            </td>
+
+                                            <td>
+                                                <a class=" btn btn-outline-dark btn-social-icon" href="@Url.Action("Details", "PersonalToDoList", new { id = item.PToDoListId })">
+                                                    <i class="fa-solid fa-eye  p-2 mt-2"></i>
+
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class=" btn btn-outline-danger btn-social-icon" href="@Url.Action("Delete", "PersonalToDoList", new { id = item.PToDoListId })">
+                                                    <i class="fa-solid fa-trash-can  p-2 mt-2"></i>
+
+                                                </a>
+                                            
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Completed Tasks</h4>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>

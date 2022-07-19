@@ -1,0 +1,62 @@
+﻿@model TMS.Models.PersonalToDoListTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="jumbotron">
+
+
+    <div class="card text-center">
+        <div class="card-header">
+           PERSONALTOTOLIST  DETAILS
+        </div>
+        <div class="card-body">
+           
+            <div class=" table-responsive">
+         
+                <hr />
+             
+                    <table class="table table-striped display expandable-table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th scope="col"> @Html.DisplayNameFor(model => model.UserName)</th>
+                                <th scope="col">   @Html.DisplayNameFor(model => model.TaskName)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.TaskFeedback)</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"> @Html.DisplayFor(model => model.UserName)</th>
+                                <td> @Html.DisplayFor(model => model.TaskName)</td>
+                                <td> @Html.DisplayFor(model => model.TaskFeedback)</td>
+                              
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+
+            </div>
+            <div style="margin-top:10px;">
+                <p>
+                    <a class="btn btn-primary" href=" @Url.Action("Edit", "PersonalToDoList", new { id = Model.PToDoListId })"> Edit </a>
+                    <a class="btn btn-outline-primary" href=" @Url.Action("Index", "PersonalToDoList", new { id = Model.PToDoListId })"> Back to List</a>
+                </p>
+            </div>
+
+
+
+
+
+        </div>
+        <div class="card-footer text-muted">
+           DETAILS
+        </div>
+    </div>
+
+
+   
+
+</div>

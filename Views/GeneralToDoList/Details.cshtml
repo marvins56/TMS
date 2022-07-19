@@ -1,0 +1,81 @@
+﻿@model TMS.Models.GeneralToDoListTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="jumbotron">
+
+    <div class="card text-center">
+        <div class="card-header">
+            TASK  DETAILS
+        </div>
+        <div class="card-body">
+
+            <div class=" table-responsive">
+
+                <hr />
+
+                <table class="table table-striped display expandable-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.IsTaskComplete)</th>
+                            <th scope="col">     @Html.DisplayNameFor(model => model.TaskName)</th>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.TaskFeedBack)</th>
+                            <th scope="col">     @Html.DisplayNameFor(model => model.CompletionDate)</th>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.TaskTable.TaskName)</th>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.UnitTable.UnitName)</th>
+                            <th scope="col">     @Html.DisplayNameFor(model => model.UsersTable.Username)</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="col">
+                                @if (Model.IsTaskComplete == true)
+                                {
+                                    <button class=" btn badge-success">@Html.DisplayFor(model => model.IsTaskComplete) Completed</button>
+                                }
+                                else
+                                {
+                                    <button class="btn badge-warning text-white">@Html.DisplayFor(model => model.IsTaskComplete) Pending </button>
+                                }
+
+                            </td>
+                            <td scope="col">     @Html.DisplayFor(model => model.TaskName)</td>
+                            <td scope="col">  @Html.DisplayFor(model => model.TaskFeedBack)</td>
+                            <td scope="col">     @Html.DisplayFor(model => model.CompletionDate)</td>
+                            <td scope="col">  @Html.DisplayFor(model => model.TaskTable.TaskName)</td>
+                            <td scope="col">  @Html.DisplayFor(model => model.UnitTable.UnitName)</td>
+                            <td scope="col">     @Html.DisplayFor(model => model.UsersTable.Username)</td>
+                            <td scope="col">
+
+                            </td>                  
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top:10px;">
+                <p>
+                    <a class="btn btn-primary" href=" @Url.Action("Edit", "GeneralToDoList" , new {id =Model.ToDoId })"> Edit </a>
+                    @if (Session["urserrole"].Equals(2))
+                    {
+                        <a class="btn btn-outline-primary" href=" @Url.Action("index", "GeneralToDoList")"> All List</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-primary" href=" @Url.Action("MyToDo", "GeneralToDoList")"> All List</a>
+                    }
+                </p>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            @{
+                var time = @Html.DisplayFor(model => model.CompletionDate);
+
+                <a href="https://logwork.com/countdown-7k4v" class="countdown-timer text-primary" data-style="circles" data-textcolor="#39574c" data-timezone="Africa/Kampala" data-date=@time>c</a>
+            }
+        </div>
+    </div>
+
+</div>

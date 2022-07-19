@@ -1,0 +1,100 @@
+﻿@model IEnumerable<TMS.Models.GeneralToDoListTable>
+
+
+
+
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title text-uppercase">
+                    ADDITIONALTASKS ASSIGNED
+                    <span class="text-primary">
+                        @Session["usernames"]
+                    </span>
+                </p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="display expandable-table" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TaskName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TaskFeedBack)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IsTaskComplete)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CompletionDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TaskTable.TaskName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.UnitTable.UnitName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.UsersTable.Username)
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TaskName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TaskFeedBack)
+                                            </td>                                           
+                                            <td>
+                                                @if (item.IsTaskComplete == true)
+                                                {
+                                                    <button class=" btn badge-success">@Html.DisplayFor(modelItem => item.IsTaskComplete) Completed</button>
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn badge-warning text-white">@Html.DisplayFor(modelItem => item.IsTaskComplete) Pending </button>
+                                                }
+
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CompletionDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TaskTable.TaskName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.UnitTable.UnitName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.UsersTable.Username)
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("Details", "GeneralToDoList",new { id = item.ToDoId })" class="btn btn-inverse-success">
+                                                    <i class="fa-solid fa-eye   "></i>
+
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

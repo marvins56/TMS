@@ -1,0 +1,181 @@
+﻿@model TMS.Models.UserLogin
+
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/App_Start/authentication/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/App_Start/authentication/css/style.css">
+</head>
+
+
+@* Here we will add 2 form, 1 for Login and another one for 2FA token verification form *@
+@if (ViewBag.Status == null || !ViewBag.Status)
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        if (ViewBag.message != null)
+        {
+            <div class="card text-center  mt-100">
+                <div class="card-header bg-danger text-white">Notification</div>
+                <div class="card-body">
+                    <h5 class="card-title ">ERROR!!!</h5>
+                    <p class="card-text">  @ViewBag.message</p>
+
+                    @Html.ValidationMessage("emailNotVerified", new { @class = "text-danger" })
+
+                </div>
+                <div class="card-footer text-muted "> <a href="#" class="btn btn-outline-primary text-black">@ViewData["nowDt"]</a></div>
+            </div>
+ }
+        
+            <body>
+                <div class="main">
+                    <section class="sign-in">
+                        <div class="container">
+                            <div class="signin-content">
+                                <div class="signin-image">
+                                    <figure><img src="~/App_Start/Email/assets/img/pol.png" alt="sing up image" class="img-fluid m-10"></figure>
+                                    <a href="@Url.Action("Registration", "Users")" class="signup-image-link">Create an account</a>
+                                </div>
+
+                                <div class="signin-form">
+                                    <h2 class="form-title ">TMS <br /> </h2>
+
+                                    <form>
+
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+
+                                            <label><i class="fa-solid fa-envelope-circle-check pl-2"></i> </label>
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { id = "email", placeholder = "Your Email" } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+
+                                            <label>  <i class="fa-solid fa-key pl-2"></i></label>
+                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "passowrd" } })
+                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                @Html.EditorFor(model => model.RememberMe)
+
+                                                @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                                            </div>
+                                            <label><span><span></span></span>@Html.LabelFor(model => model.RememberMe, new { @class = "label-agree-term" })</label>
+
+                                        </div>
+
+                                        <!-- Submit button -->
+                                        <div class="form-group form-button">
+                                            <button type="submit" class=" btn btn-primary w-100">log In</button>
+                                        </div>
+                                        <span signup-image-link> <a href="@Url.Action("ForgotPassword", "Users")" class="signup-image-link"> Forgot Password?  RESET</a></span>
+                                    </form>
+                                    <div class="social-login">
+                                        <span class="social-label">Or login with</span>
+                                        <ul class="socials">
+                                            <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                                            <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                                            <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+            </body>
+        }
+
+
+
+
+    
+
+}
+else
+{
+
+
+
+    <div class="main ">
+        <section class="sign-in">
+            <div class="container ">
+                <div class="signin-content justify-content-center text-center">
+
+                    <div class=" text-center">
+
+                        <div class="card " style="width: 18rem; align-content:center;">
+                            <h2 class="text-center">
+                                <a class="navbar-brand brand-logo-mini" href="@Url.Action("Registration", "Users")"><img src="~/App_Start/Email/assets/img/pol.png" class="mr-2 mt-2" alt="logo" style="width:20%" />TMS</a>
+                            </h2>
+
+                            <div class="text-center">@ViewBag.Message</div>
+                            <img src="@ViewBag.BarcodeImageUrl" class="card-img-top" alt="Card image cap" />
+
+                            <div class="card-body">
+                                <p class="card-title">   Manual Setup Code : @ViewBag.SetupCode</p>
+                                <p class="text-success"> please enter code </p>
+                                <p class="card-text">
+                                    @using (Html.BeginForm("Verify2FA", "Users", FormMethod.Post))
+                                    {
+                                        <div>
+                                            <input type="text" name="passcode" class="form-control pb-10" /><br />
+
+                                        </div>
+                                        <input type="submit" class="btn btn-success mt-10" />
+
+
+                                    }
+
+
+
+
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+}
+
+
+
+
+
+}
+</html>
+
+        @section Scripts {
+            @Scripts.Render("~/tinymce/jqueryval")
+        }
+
+

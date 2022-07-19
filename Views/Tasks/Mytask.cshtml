@@ -1,0 +1,221 @@
+﻿@model IEnumerable<TMS.Models.TaskTable>
+
+
+
+@if (TempData["sessiondataaccess"] != null)
+{
+    <div class="card text-center  mt-100">
+        <div class="card-header bg-danger text-white">Notification</div>
+        <div class="card-body">
+            <h5 class="card-title ">TASK CONFIRMATION</h5>
+            <p class="card-text">  @TempData["sessiondataaccess"]</p>
+
+        </div>
+        @if (Session["urserole"].Equals(2))
+        {
+
+            <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Tasks")" class="btn btn-outline-primary text-black"> BACK TO TASKS </a></div>
+
+        }
+        else
+        {
+            <div class="card-footer text-muted"> <a href="@Url.Action("Mytask", "Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+
+        }
+
+    </div>
+
+}
+else
+{
+    //checking for email errors
+    if (TempData["emailerror"] == null)
+    {
+
+
+        if (TempData["emailstatus"] != null)
+        {
+            <div class="card text-center  mt-100">
+                <div class="card-header bg-success text-white">Notification</div>
+                <div class="card-body">
+                    <h5 class="card-title ">TASK CONFIRMATION</h5>
+                    <p class="card-text">  @TempData["emailstatus"]</p>
+
+                </div>
+                @if (Session["urserrole"].Equals(2))
+                {
+                    <div class="card-footer text-muted"> <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+
+                }
+                else
+                {
+                    <div class="card-footer text-muted"> <a href="@Url.Action("Mytask","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+
+                }
+
+
+            </div>
+
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-title text-uppercase">
+                                TASKS ASSIGNED
+                                <span class="text-primary">
+                                    @Session["usernames"]
+                                </span>
+                            </p>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="display expandable-table" style="width:100%">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.TaskName)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.FeedBack)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.BodyContent)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.TaskStatus)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.TastStartTime)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.TaskEndTime)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.UnitTable.UnitName)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.UsersTable.Username)
+                                                    </th>
+                                                    <th>TASK TIMER</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+
+
+                                                    <tr>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.TaskName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.FeedBack)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.BodyContent)
+                                                        </td>
+                                                        <td>
+                                                            @if (item.TaskStatus == true)
+                                                            {
+                                                                <button class=" btn badge-success"> Completed</button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button class="btn badge-warning text-white"> Pending</button>
+                                                            }
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.TastStartTime)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.TaskEndTime)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.UnitTable.UnitName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.UsersTable.Username)
+                                                        </td>
+                                                        <td>
+                                                            @{
+                                                                var time = @Html.DisplayFor(modelItem => item.TaskEndTime);
+                                                               
+                                                                <a href="https://logwork.com/countdown-7k4v" class="countdown-timer text-primary" data-style="circles" data-textcolor="#39574c" data-timezone="Africa/Kampala" data-date=@time>c</a>
+
+
+                                                            }
+
+                                                        </td>
+                                                        <td>
+                                                            <a href="@Url.Action("Edit", "Tasks", new { id = item.TaskId })" class="btn btn-inverse-primary">
+                                                                <i class="fa-solid fa-pen-to-square   "></i>
+
+                                                            </a>
+                                                            <a href="@Url.Action("Details", "Tasks", new { id = item.TaskId })" class="btn btn-inverse-success">
+                                                                <i class="fa-solid fa-eye   "></i>
+
+                                                            </a>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        }
+
+    }
+
+    else
+    {
+
+        <div class="card text-center  mt-100">
+            <div class="card-header bg-danger text-white">Notification</div>
+            <div class="card-body">
+                <h5 class="card-title ">TASK CONFIRMATION</h5>
+                <p class="card-text">  @TempData["emailerror"]</p>
+
+            </div>
+            @if (Session["urserrole"].Equals(2))
+            {
+                <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+
+            }
+            else
+            {
+                <div class="card-footer text-muted"> <a href="@Url.Action("Mytask", "Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+
+            }
+
+
+
+
+        </div>
+
+    }
+
+}
+
+
+
+
+
+

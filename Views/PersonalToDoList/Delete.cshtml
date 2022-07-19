@@ -1,0 +1,71 @@
+﻿@model TMS.Models.PersonalToDoListTable
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div class="jumbotron">
+
+
+    <div class="card text-center">
+
+        <div class="card-body">
+
+            <div class=" table-responsive">
+
+                <hr />
+
+                <table class="table table-striped display expandable-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col">   @Html.DisplayNameFor(model => model.UserName)</th>
+                            <th scope="col">     @Html.DisplayNameFor(model => model.TaskName)</th>
+                            <th scope="col">    @Html.DisplayNameFor(model => model.TaskFeedback)</th>
+                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="col">   @Html.DisplayFor(model => model.UserName)</th>
+                            <th scope="col">     @Html.DisplayFor(model => model.TaskName)</th>
+                            <th scope="col">    @Html.DisplayFor(model => model.TaskFeedback)</th>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+        <div class="card-footer text-muted">
+            <div class="card-header">
+                <h3>Are you sure you want to delete this?</h3>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                     
+                                <a class="btn btn-outline-primary" href=" @Url.Action("Index", "PersonalToDoList")"> BACK</a>
+
+                       
+                          
+                        
+
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+

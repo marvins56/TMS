@@ -1,0 +1,170 @@
+﻿@model TMS.Models.TaskTable
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@if (Session["urserrole"].Equals(2))
+{
+
+    if (ViewBag.sessiondataaccess != null)
+    {
+        <div class="card text-center  mt-100">
+            <div class="card-header bg-danger text-white">Notification</div>
+            <div class="card-body">
+                <h5 class="card-title ">EMAIL CONFIRMATION</h5>
+                <p class="card-text">  @ViewBag.sessiondataaccess</p>
+
+
+            </div>
+            <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Tasks")" class="btn btn-outline-primary text-black"> view Changes</a></div>
+        </div>
+
+    }
+    else
+    {
+
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-horizontal">
+
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TaskName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.TaskName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TaskName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FeedBack, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FeedBack, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FeedBack, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BodyContent, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.BodyContent, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BodyContent, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TaskStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.TaskStatus)
+                                @Html.ValidationMessageFor(model => model.TaskStatus, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TastStartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.TastStartTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TastStartTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TaskEndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.TaskEndTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TaskEndTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UnitId, "UnitId", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("UnitId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.UnitId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <a class="btn btn-outline-primary" href=" @Url.Action("Index", "Tasks")"> View Changes</a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="ml-xl-4 mt-3">
+                    <p class="card-title"></p>
+                    <img src="~/App_Start/images/activities/todo.jpg" class="img-fluid" style="width:100%" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+           
+
+            if (ViewBag.emailstatus != null)
+            {
+
+                <div class="card text-center  mt-100">
+                    <div class="card-header bg-success text-white">Notification</div>
+                    <div class="card-body">
+                        <h5 class="card-title">EMAIL CONFIRMATION</h5>
+                        <p class="card-text">  @ViewBag.emailstatus</p>
+
+
+                    </div>
+                    <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Tasks")" class="btn btn-outline-primary text-black"> view Changes</a></div>
+                </div>
+            }
+        }
+    }
+ 
+
+
+
+}
+else
+{
+
+    <div class="card text-center  mt-100">
+        <div class="card-header bg-danger text-white">Notification</div>
+        <div class="card-body">
+            <h5 class="card-title">NOT AUTHORISED</h5>
+            <p class="card-text">  access denied</p>
+
+
+        </div>
+        <div class="card-footer text-muted"> <a href="@Url.Action("Mytask", "Tasks")" class="btn btn-outline-primary text-black"> view Changes</a></div>
+    </div>
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

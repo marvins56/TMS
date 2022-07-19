@@ -1,0 +1,90 @@
+﻿@model TMS.Models.TaskTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div class="jumbotron">
+
+
+    <div class="card text-center">
+        <div class="card-header">
+            TASK  DETAILS
+        </div>
+        <div class="card-body">
+
+            <div class=" table-responsive">
+
+                <hr />
+
+                <table class="table table-striped display expandable-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.TaskName)</th>
+                            <th scope="col">     @Html.DisplayNameFor(model => model.FeedBack)</th>
+                            <th scope="col"> @Html.DisplayNameFor(model => model.BodyContent)</th>
+                            <th scope="col">   @Html.DisplayNameFor(model => model.TaskStatus)</th>
+                            <th scope="col"> @Html.DisplayNameFor(model => model.TastStartTime)</th>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.TaskEndTime)</th>
+                            <th scope="col">    @Html.DisplayNameFor(model => model.UnitTable.UnitName)</th>
+                            <th scope="col">    @Html.DisplayNameFor(model => model.UsersTable.Username)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="col">  @Html.DisplayFor(model => model.TaskName)</td>
+                            <td scope="col">     @Html.DisplayFor(model => model.FeedBack)</td>
+                            <td scope="col"> @Html.DisplayFor(model => model.BodyContent)</td>
+
+                            <td scope="col">
+                                @if (Model.TaskStatus == true)
+                                {
+                                    <button class=" btn badge-success">@Html.DisplayFor(model => model.TaskStatus) Completed</button>
+                                }
+                                else
+                                {
+                                    <button class="btn badge-warning text-white">@Html.DisplayFor(model => model.TaskStatus) Pending </button>
+                                }
+                            </td>
+                            <td scope="col"> @Html.DisplayFor(model => model.TastStartTime)</td>
+                            <td scope="col">  @Html.DisplayFor(model => model.TaskEndTime)</td>
+                            <td scope="col">    @Html.DisplayFor(model => model.UnitTable.UnitName)</td>
+                            <td scope="col">    @Html.DisplayFor(model => model.UsersTable.Username)</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div style="margin-top:10px;">
+                <p>
+                    <a class="btn btn-primary" href=" @Url.Action("Edit", "Tasks", new { id = Model.TaskId })"> Edit </a>
+                    @if ((Session["urserrole"].Equals(1)))
+                    {
+                        <a class="btn btn-outline-primary" href=" @Url.Action("Mytask", "Tasks", new { id = Model.TaskId })"> BACK</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-primary" href=" @Url.Action("AllTasks", "Tasks", new { id = Model.TaskId })"> All List</a>
+
+                    }
+                </p>
+            </div>
+
+
+        </div>
+        <div class="card-footer text-muted">
+            @{ 
+                var timer = @Html.DisplayFor(model => model.TaskEndTime);
+            }
+            <a href="https://logwork.com/countdown-7k4v" class="countdown-timer text-primary" data-style="circles" data-textcolor="#39574c" data-timezone="Africa/Kampala" data-date=@timer>c</a>
+        </div>
+    </div>
+
+
+
+
+</div>

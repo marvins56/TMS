@@ -1,0 +1,58 @@
+﻿@model TMS.Models.UsersRolesTable
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="jumbotron">
+<div class="card text-center">
+
+        <div class="card-body">
+
+            <div class=" table-responsive">
+
+                <hr />
+
+                <table class="table table-striped display expandable-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col">     @Html.DisplayNameFor(model => model.UsersTable.Username)</th>
+                            <th scope="col">   @Html.DisplayNameFor(model => model.RolesTable.RoleName)</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="col">      @Html.DisplayFor(model => model.UsersTable.Username)</td>
+                            <td scope="col">  @Html.DisplayFor(model => model.RolesTable.RoleName)</td>
+
+
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+        <div class="card-footer text-muted">
+            <div class="card-header">
+                <h3>DEACTIVATE USER ROLE.</h3>
+                <p class="text-danger"> Deactivating will not delete the user, it simply removes the access rights from the user.</p>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Deactivate" class="btn btn-danger" />
+                <a class="btn btn-outline-primary" href=" @Url.Action("Index", "UsersRoles")"> BACK</a>
+            </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

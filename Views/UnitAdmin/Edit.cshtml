@@ -1,33 +1,41 @@
-﻿@model TMS.Models.RolesTable
+﻿@model TMS.Models.UnitAdminTable
 
 @{
     ViewBag.Title = "Edit";
 }
+
 @if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
 {
-
 
     using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>RolesTable</h4>
+            <h4>UnitAdminTable</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.RolesId)
+            @Html.HiddenFor(model => model.UnitAdminid)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Userid, "Userid", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.RoleName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+                    @Html.DropDownList("Userid", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Userid, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UnitId, "UnitId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("UnitId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UnitId, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Save" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -36,7 +44,6 @@
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
-
 }
 else
 {
@@ -51,8 +58,4 @@ else
         <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Home")" class="btn btn-outline-primary text-black"> <i class="fa-solid fa-house-circle-check"></i></a></div>
     </div>
 
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

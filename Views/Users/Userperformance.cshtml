@@ -1,35 +1,35 @@
-﻿@if (ViewBag.sessioniderror != null)
+﻿@if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
 {
-    <div class="card text-center  mt-100">
-        <div class="card-header bg-danger text-white">Notification</div>
-        <div class="card-body">
-            <h5 class="card-title ">USER ERROR</h5>
-            <p class="card-text">  @ViewBag.sessioniderror</p>
-            @if (!(Session["urserrole"].Equals(1)))
-            {
+    if (ViewBag.sessioniderror != null)
+    {
+        <div class="card text-center  mt-100">
+            <div class="card-header bg-danger text-white">Notification</div>
+            <div class="card-body">
+                <h5 class="card-title ">USER ERROR</h5>
+                <p class="card-text">  @ViewBag.sessioniderror</p>
+                @if (!(Session["urserrole"].Equals(1)))
+                {
 
-                @Html.ActionLink("BACK", "index", "Users")
-            }
-           
+                    @Html.ActionLink("BACK", "index", "Users")
+                }
+
+            </div>
+            <div class="card-footer text-muted"> <a href="#" class="btn btn-outline-primary text-black">CANT VIEW STATISTICS FOR USER</a></div>
         </div>
-        <div class="card-footer text-muted"> <a href="#" class="btn btn-outline-primary text-black">CANT VIEW STATISTICS FOR USER</a></div>
-    </div>
 
-}
-else
-{
+    }
+    else
+    {
 
 
-    <div class="row">
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-title mb-0">Personal statistics</p>
-                    <div id="donutchart" style="width:100%;height:100%"></div>
+        <div class="row">
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title mb-0">Personal statistics</p>
+                        <div id="donutchart" style="width:100%;height:100%"></div>
 
-
-
-                    <script type="text/javascript">
+                        <script type="text/javascript">
                             google.charts.load("current", { packages: ["corechart"] });
                             google.charts.setOnLoadCallback(drawChart);
                             function drawChart() {
@@ -52,102 +52,117 @@ else
                                 var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
                                 chart.draw(data, options);
                             }
-                    </script>
+                        </script>
 
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-title">Personal performance</p>
-                            <div class="charts-data">
-                                <div class="mt-3">
-                                    <p class="mb-0">My Total Tasks</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="progress progress-md flex-grow-1 mr-4">
-                                            <div class="progress-bar bg-inf0" role="progressbar" style="width: @ViewBag.mytotaltasks%" aria-valuenow="@ViewBag.mytotaltasks" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="row">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">Personal performance</p>
+                                <div class="charts-data">
+                                    <div class="mt-3">
+                                        <p class="mb-0">My Total Tasks</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="progress progress-md flex-grow-1 mr-4">
+                                                <div class="progress-bar bg-inf0" role="progressbar" style="width: @ViewBag.mytotaltasks%" aria-valuenow="@ViewBag.mytotaltasks" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <p class="mb-0">@ViewBag.mytotaltasks</p>
                                         </div>
-                                        <p class="mb-0">@ViewBag.mytotaltasks</p>
+                                    </div>
+                                    <div class="mt-3">
+                                        <p class="mb-0">Incomplete Tasks</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="progress progress-md flex-grow-1 mr-4">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width:@ViewBag.myincompletetasks%" aria-valuenow="@ViewBag.myincompletetasks" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <p class="mb-0">@ViewBag.myincompletetasks</p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <p class="mb-0">Completed Tasks</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="progress progress-md flex-grow-1 mr-4">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: @ViewBag.mycompletetasks%" aria-valuenow="@ViewBag.mycompletetasks" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <p class="mb-0">@ViewBag.mycompletetasks</p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <p class="mb-0">My Additioal tasks </p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="progress progress-md flex-grow-1 mr-4">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: @ViewBag.myToDotasks%" aria-valuenow="@ViewBag.myToDotasks" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <p class="mb-0">@ViewBag.myToDotasks</p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <p class="mb-0">submitted reports </p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="progress progress-md flex-grow-1 mr-4">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: @ViewBag.myreports%" aria-valuenow="@ViewBag.myreports" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <p class="mb-0">@ViewBag.myreports</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="mt-3">
-                                    <p class="mb-0">Incomplete Tasks</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="progress progress-md flex-grow-1 mr-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width:@ViewBag.myincompletetasks%" aria-valuenow="@ViewBag.myincompletetasks" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mb-0">@ViewBag.myincompletetasks</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 stretch-card grid-margin grid-margin-md-0">
+                        <div class="card data-icon-card-primary">
+                            <div class="card-body">
+                                <p class="card-title text-white">Performace Details</p>
+                                <div class="row">
+                                    <div class="col-8 text-white">
+                                        <hr>
+                                        <p class="text-white font-weight-500 mb-0">
+                                            Efficiency refers to the peak level of performance that uses the least amount of
+                                            inputs to achieve the highest amount of output
+
+                                        </p>
                                     </div>
-                                </div>
-                                <div class="mt-3">
-                                    <p class="mb-0">Completed Tasks</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="progress progress-md flex-grow-1 mr-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: @ViewBag.mycompletetasks%" aria-valuenow="@ViewBag.mycompletetasks" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mb-0">@ViewBag.mycompletetasks</p>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <p class="mb-0">My Additioal tasks </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="progress progress-md flex-grow-1 mr-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: @ViewBag.myToDotasks%" aria-valuenow="@ViewBag.myToDotasks" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mb-0">@ViewBag.myToDotasks</p>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <p class="mb-0">submitted reports </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="progress progress-md flex-grow-1 mr-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: @ViewBag.myreports%" aria-valuenow="@ViewBag.myreports" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <p class="mb-0">@ViewBag.myreports</p>
+                                    <div class="col-4 background-icon">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 stretch-card grid-margin grid-margin-md-0">
-                    <div class="card data-icon-card-primary">
-                        <div class="card-body">
-                            <p class="card-title text-white">Performace Details</p>
-                            <div class="row">
-                                <div class="col-8 text-white">
-                                    <hr>
-                                    <p class="text-white font-weight-500 mb-0">
-                                        Efficiency refers to the peak level of performance that uses the least amount of
-                                        inputs to achieve the highest amount of output
+            </div>
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title"><hr /></p>
+                        <div class="ml-xl-4 mt-3">
+                            <p class="card-title"></p>
+                            <img src="~/App_Start/images/activities/performance.jpg" class="img-fluid" style="width:100%" />
 
-                                    </p>
-                                </div>
-                                <div class="col-4 background-icon">
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-title"><hr /></p>
-                    <div class="ml-xl-4 mt-3">
-                        <p class="card-title"></p>
-                        <img src="~/App_Start/images/activities/performance.jpg" class="img-fluid" style="width:100%" />
+    }
 
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 }
+else
+{
+    <div class="card text-center  mt-100">
+        <div class="card-header bg-danger text-white">Notification</div>
+        <div class="card-body">
+            <h5 class="card-title">NOT AUTHORISED</h5>
+            <p class="card-text">  access denied</p>
 
+
+        </div>
+        <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Home")" class="btn btn-outline-primary text-black"> <i class="fa-solid fa-house-circle-check"></i></a></div>
+    </div>
+
+}

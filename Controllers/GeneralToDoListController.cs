@@ -136,10 +136,28 @@ namespace TMS.Controllers
             return View(results);
         }
 
+        public ActionResult unittodos()
+        {
+            int uid = Convert.ToInt32(Session["userunit"]);
+            var results = db.GeneralToDoListTables.Where(i => i.UnitId == uid).ToList();
+
+            
+            return View(results);
+        }
         public ActionResult AllToDos()
         {
             var generalToDoListTables = db.GeneralToDoListTables.Include(g => g.TaskTable).Include(g => g.UnitTable).Include(g => g.UsersTable);
             return View(generalToDoListTables.ToList());
+        }
+
+        //admin todo  for a unit
+        public ActionResult loneUnittodos(int id)
+        {
+            var results = db.GeneralToDoListTables.Where(i => i.UnitId == id).ToList();
+            Session["countcompleted"] = db.GeneralToDoListTables.Where(i => i.UnitId == id && i.IsTaskComplete == true).Count();
+            Session["countincompleted"] = db.GeneralToDoListTables.Where(i => i.UnitId == id && i.IsTaskComplete == false).Count();
+
+            return View(results);
         }
         protected override void Dispose(bool disposing)
         {

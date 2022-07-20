@@ -1,9 +1,4 @@
 ﻿@model IEnumerable<TMS.Models.TaskTable>
-
-@{
-    ViewBag.Title = "Index";
-}
-
 @if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
 {
     if (TempData["sessiondataaccess"] == null)

@@ -16,24 +16,30 @@ namespace TMS.Models
     public partial class GeneralToDoListTable
     {
         public int ToDoId { get; set; }
-
-        [Display(Name = "User Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = " User Name field required")]    
+        [Display(Name="User Name")]
         public int UserName { get; set; }
         [Display(Name = "Task Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = " Task Name field required")]
+        [DataType(DataType.MultilineText)]
+        [MaxLength(20, ErrorMessage = "please give a shorter sentence")]
+        [MinLength(6, ErrorMessage = "minimum characters are 6 please try again")]
         public string TaskName { get; set; }
-
-        [Display(Name = "Task FeedBack")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = " Task FeedBack field required")]
+        [Display(Name = "Task FeedBack ")]
+        [DataType(DataType.MultilineText)]
+        [MaxLength(20, ErrorMessage = "please give a shorter sentence")]
+        [MinLength(6, ErrorMessage = "minimum characters are 6 please try again")]
         public string TaskFeedBack { get; set; }
-        [Display(Name = "Task Reference")]
+        [Display(Name = "Task Refrence ")]
+        
         public int TaskId { get; set; }
-        [Display(Name = "Task Status")]
+        [Display(Name = "Task Status ")]
         public bool IsTaskComplete { get; set; }
-        [Display(Name = "Unit Name")]
+        [Display(Name = "User Unit ")]
         public int UnitId { get; set; }
+
+        [Display(Name = "Task deadline ")]
         [DataType(DataType.Date)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = " deadline field required")]
+        
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime CompletionDate { get; set; }
     

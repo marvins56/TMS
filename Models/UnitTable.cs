@@ -20,17 +20,18 @@ namespace TMS.Models
         {
             this.TaskTables = new HashSet<TaskTable>();
             this.GeneralToDoListTables = new HashSet<GeneralToDoListTable>();
+            this.UnitAdminTables = new HashSet<UnitAdminTable>();
         }
-    
+        [Display(Name = "Unit id ")]
         public int UnitId { get; set; }
-        [Display(Name = "Unit Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = " Unit Name field required")]
+        [Display(Name = "Unit Name ")]
         public string UnitName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaskTable> TaskTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GeneralToDoListTable> GeneralToDoListTables { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnitAdminTable> UnitAdminTables { get; set; }
     }
 }
-

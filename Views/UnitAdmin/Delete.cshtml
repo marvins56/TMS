@@ -1,4 +1,4 @@
-﻿@model TMS.Models.UsersRolesTable
+﻿@model TMS.Models.UnitAdminTable
 
 @{
     ViewBag.Title = "Delete";
@@ -17,16 +17,16 @@
                     <table class="table table-striped display expandable-table" style="width:100%">
                         <thead>
                             <tr>
-                                <th scope="col">     @Html.DisplayNameFor(model => model.UsersTable.Username)</th>
-                                <th scope="col">   @Html.DisplayNameFor(model => model.RolesTable.RoleName)</th>
+                                <th scope="col">         @Html.DisplayNameFor(model => model.UnitTable.UnitName)</th>
+                                <th scope="col">   @Html.DisplayNameFor(model => model.UsersTable.Username)</th>
 
 
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td scope="col">      @Html.DisplayFor(model => model.UsersTable.Username)</td>
-                                <td scope="col">  @Html.DisplayFor(model => model.RolesTable.RoleName)</td>
+                                <td scope="col">        @Html.DisplayFor(model => model.UnitTable.UnitName)</td>
+                                <td scope="col">   @Html.DisplayFor(model => model.UsersTable.Username)</td>
 
 
 
@@ -40,8 +40,8 @@
             </div>
             <div class="card-footer text-muted">
                 <div class="card-header">
-                    <h3>DEACTIVATE USER ROLE.</h3>
-                    <p class="text-danger"> Deactivating will not delete the user, it simply removes the access rights from the user.</p>
+                    <h3>DEACTIVATE USER UNIT.</h3>
+                    <p class="text-danger"> Deactivating will not delete the user, it simply removes the access rights for units from the user.</p>
 
                     @using (Html.BeginForm())
                     {
@@ -49,7 +49,7 @@
 
                         <div class="form-actions no-color">
                             <input type="submit" value="Deactivate" class="btn btn-danger" />
-                            <a class="btn btn-outline-primary" href=" @Url.Action("Index", "UsersRoles")"> BACK</a>
+                            <a class="btn btn-outline-primary" href=" @Url.Action("Index", "UnitAdmin")"> BACK</a>
                         </div>
                     }
 

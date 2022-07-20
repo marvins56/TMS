@@ -48,6 +48,14 @@
           <Property Name="TaskEndTime" Type="datetime" Nullable="false" />
           <Property Name="UnitId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="UnitAdminTable">
+          <Key>
+            <PropertyRef Name="UnitAdminid" />
+          </Key>
+          <Property Name="UnitAdminid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Userid" Type="int" Nullable="false" />
+          <Property Name="UnitId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="UnitTable">
           <Key>
             <PropertyRef Name="UnitId" />
@@ -86,6 +94,18 @@
           <Property Name="ActivationCode" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ResetPasswordCode" Type="varchar" MaxLength="100" />
         </EntityType>
+        <Association Name="fk_adminunitroles">
+          <End Role="UnitTable" Type="Self.UnitTable" Multiplicity="1" />
+          <End Role="UnitAdminTable" Type="Self.UnitAdminTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTable">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="UnitAdminTable">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_TaskId_tasks">
           <End Role="TaskTable" Type="Self.TaskTable" Multiplicity="1" />
           <End Role="GeneralToDoListTable" Type="Self.GeneralToDoListTable" Multiplicity="*" />
@@ -119,6 +139,18 @@
             </Principal>
             <Dependent Role="TaskTable">
               <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_useradminroleunit">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="1" />
+          <End Role="UnitAdminTable" Type="Self.UnitAdminTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Userid" />
+            </Principal>
+            <Dependent Role="UnitAdminTable">
+              <PropertyRef Name="Userid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -199,10 +231,15 @@
           <EntitySet Name="PersonalToDoListTable" EntityType="Self.PersonalToDoListTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolesTable" EntityType="Self.RolesTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskTable" EntityType="Self.TaskTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitAdminTable" EntityType="Self.UnitAdminTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitTable" EntityType="Self.UnitTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserReportsTable" EntityType="Self.UserReportsTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersRolesTable" EntityType="Self.UsersRolesTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersTable" EntityType="Self.UsersTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_adminunitroles" Association="Self.fk_adminunitroles">
+            <End Role="UnitTable" EntitySet="UnitTable" />
+            <End Role="UnitAdminTable" EntitySet="UnitAdminTable" />
+          </AssociationSet>
           <AssociationSet Name="fk_TaskId_tasks" Association="Self.fk_TaskId_tasks">
             <End Role="TaskTable" EntitySet="TaskTable" />
             <End Role="GeneralToDoListTable" EntitySet="GeneralToDoListTable" />
@@ -214,6 +251,10 @@
           <AssociationSet Name="fk_UnitId" Association="Self.fk_UnitId">
             <End Role="UnitTable" EntitySet="UnitTable" />
             <End Role="TaskTable" EntitySet="TaskTable" />
+          </AssociationSet>
+          <AssociationSet Name="fk_useradminroleunit" Association="Self.fk_useradminroleunit">
+            <End Role="UsersTable" EntitySet="UsersTable" />
+            <End Role="UnitAdminTable" EntitySet="UnitAdminTable" />
           </AssociationSet>
           <AssociationSet Name="fk_UserIdz" Association="Self.fk_UserIdz">
             <End Role="UsersTable" EntitySet="UsersTable" />
@@ -289,6 +330,15 @@
             <End Role="UsersTable" EntitySet="UsersTables" />
             <End Role="UserReportsTable" EntitySet="UserReportsTables" />
           </AssociationSet>
+          <EntitySet Name="UnitAdminTables" EntityType="TMSModel.UnitAdminTable" />
+          <AssociationSet Name="fk_adminunitroles" Association="TMSModel.fk_adminunitroles">
+            <End Role="UnitTable" EntitySet="UnitTables" />
+            <End Role="UnitAdminTable" EntitySet="UnitAdminTables" />
+          </AssociationSet>
+          <AssociationSet Name="fk_useradminroleunit" Association="TMSModel.fk_useradminroleunit">
+            <End Role="UsersTable" EntitySet="UsersTables" />
+            <End Role="UnitAdminTable" EntitySet="UnitAdminTables" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="GeneralToDoListTable">
           <Key>
@@ -341,6 +391,7 @@
           <Property Name="UnitName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TaskTables" Relationship="TMSModel.fk_UnitId" FromRole="UnitTable" ToRole="TaskTable" />
           <NavigationProperty Name="GeneralToDoListTables" Relationship="TMSModel.fk_unitdetails" FromRole="UnitTable" ToRole="GeneralToDoListTable" />
+          <NavigationProperty Name="UnitAdminTables" Relationship="TMSModel.fk_adminunitroles" FromRole="UnitTable" ToRole="UnitAdminTable" />
         </EntityType>
         <Association Name="fk_TaskId">
           <End Type="TMSModel.TaskTable" Role="TaskTable" Multiplicity="1" />
@@ -402,6 +453,7 @@
           <NavigationProperty Name="TaskTables" Relationship="TMSModel.fk_UserIdz" FromRole="UsersTable" ToRole="TaskTable" />
           <NavigationProperty Name="UsersRolesTables" Relationship="TMSModel.fk_UsersRolesidz" FromRole="UsersTable" ToRole="UsersRolesTable" />
           <NavigationProperty Name="UserReportsTables" Relationship="TMSModel.fk_Usersreports" FromRole="UsersTable" ToRole="UserReportsTable" />
+          <NavigationProperty Name="UnitAdminTables" Relationship="TMSModel.fk_useradminroleunit" FromRole="UsersTable" ToRole="UnitAdminTable" />
         </EntityType>
         <Association Name="fk_usersdetails">
           <End Type="TMSModel.UsersTable" Role="UsersTable" Multiplicity="1" />
@@ -493,6 +545,40 @@
               <PropertyRef Name="Userid" />
             </Principal>
             <Dependent Role="UserReportsTable">
+              <PropertyRef Name="Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UnitAdminTable">
+          <Key>
+            <PropertyRef Name="UnitAdminid" />
+          </Key>
+          <Property Name="UnitAdminid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Userid" Type="Int32" Nullable="false" />
+          <Property Name="UnitId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UnitTable" Relationship="TMSModel.fk_adminunitroles" FromRole="UnitAdminTable" ToRole="UnitTable" />
+          <NavigationProperty Name="UsersTable" Relationship="TMSModel.fk_useradminroleunit" FromRole="UnitAdminTable" ToRole="UsersTable" />
+        </EntityType>
+        <Association Name="fk_adminunitroles">
+          <End Type="TMSModel.UnitTable" Role="UnitTable" Multiplicity="1" />
+          <End Type="TMSModel.UnitAdminTable" Role="UnitAdminTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTable">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="UnitAdminTable">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_useradminroleunit">
+          <End Type="TMSModel.UsersTable" Role="UsersTable" Multiplicity="1" />
+          <End Type="TMSModel.UnitAdminTable" Role="UnitAdminTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Userid" />
+            </Principal>
+            <Dependent Role="UnitAdminTable">
               <PropertyRef Name="Userid" />
             </Dependent>
           </ReferentialConstraint>
@@ -589,6 +675,15 @@
                 <ScalarProperty Name="TaskId" ColumnName="TaskId" />
                 <ScalarProperty Name="Userid" ColumnName="Userid" />
                 <ScalarProperty Name="Reportid" ColumnName="Reportid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitAdminTables">
+            <EntityTypeMapping TypeName="TMSModel.UnitAdminTable">
+              <MappingFragment StoreEntitySet="UnitAdminTable">
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="UnitAdminid" ColumnName="UnitAdminid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

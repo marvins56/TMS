@@ -59,7 +59,7 @@
             <div style="margin-top:10px;">
                 <p>
                     <a class="btn btn-primary" href=" @Url.Action("Edit", "GeneralToDoList" , new {id =Model.ToDoId })"> Edit </a>
-                    @if (Session["urserrole"].Equals(2))
+                    @if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
                     {
                         <a class="btn btn-outline-primary" href=" @Url.Action("index", "GeneralToDoList")"> All List</a>
                     }
@@ -74,8 +74,9 @@
             @{
                 var time = @Html.DisplayFor(model => model.CompletionDate);
 
-                <a href="https://logwork.com/countdown-7k4v" class="countdown-timer text-primary" data-style="circles" data-textcolor="#39574c" data-timezone="Africa/Kampala" data-date=@time>c</a>
+
             }
+            <a href="https://logwork.com/countdown-7k4v" class="countdown-timer text-primary" data-style="circles" data-textcolor="#39574c" data-timezone="Africa/Kampala" data-date=@time>c</a>
         </div>
     </div>
 

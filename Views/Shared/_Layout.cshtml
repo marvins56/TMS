@@ -157,9 +157,7 @@
                                         Logout
                                     </a>
 
-
                                 }
-
 
                             </div>
                         </li>
@@ -195,8 +193,7 @@
                         </div>
                     </div>
                 </div>
-                
-                
+                                
                 <!-- partial:partials/_sidebar.html -->
                 <nav class="sidebar sidebar-offcanvas" id="sidebar">
                     <ul class="nav">
@@ -206,16 +203,6 @@
                                 <span class="menu-title">Dashboard</span>
                             </a>
                         </li>
-
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index", "Home")">
-                                <i class="fa-solid fa-message menu-icon"></i>
-                                <span class="menu-title">Collaborate</span>
-                            </a>
-                        </li>
-
-
                         @{
                             int usersid = Convert.ToInt32(Session["userId"]);
                             int sesid = Convert.ToInt32(Session["urserrole"]);
@@ -269,75 +256,49 @@
                                     break;
                                 case 2:
                                     {
-
+                                        //administrator
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic1">
+                                            <a class="nav-link" href="@Url.Action("Myreports", "UserReports")">
                                                 <i class="fa-solid fa-folder-closed menu-icon"></i>
                                                 <span class="menu-title">Report</span>
-                                                <i class="menu-arrow"></i>
                                             </a>
-
-                                            <div class="collapse" id="ui-basic2">
-                                                <ul class="nav flex-column sub-menu">
-                                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index", "UserReports")">ALL Reports</a></li>
-                                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Myreports", "UserReports")"> My Reports</a></li>
-                                                </ul>
-                                            </div>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+                                            <a class="nav-link" data-toggle="collapse" href="#ui-basic9" aria-expanded="false" aria-controls="ui-basic9">
                                                 <i class="fa-solid fa-list-check menu-icon"></i>
                                                 <span class="menu-title">ToDoList</span>
                                                 <i class="menu-arrow"></i>
                                             </a>
 
-                                            <div class="collapse" id="ui-basic1">
+                                            <div class="collapse" id="ui-basic9">
                                                 <ul class="nav flex-column sub-menu">
                                                     <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index", "GeneralToDoList")">Admin</a></li>
-                                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("AllToDos", "GeneralToDoList")"> All ToDos</a></li>
+                                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("unittodos", "GeneralToDoList")"> Unit ToDos</a></li>
                                                 </ul>
                                             </div>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                                            <a class="nav-link" data-toggle="collapse" href="#ui-basic8" aria-expanded="false" aria-controls="ui-basic8">
                                                 <i class="fa-solid fa-list-check menu-icon"></i>
                                                 <span class="menu-title"> Tasks</span>
                                                 <i class="menu-arrow"></i>
                                             </a>
 
-                                            <div class="collapse" id="ui-basic">
+                                            <div class="collapse" id="ui-basic8">
                                                 <ul class="nav flex-column sub-menu">
                                                     <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index", "Tasks") ">Task settings</a></li>
-                                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("AllTasks", "Tasks") ">All Tasks</a></li>
+                                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("unittasks", "Tasks") ">Unit Tasks</a></li>
 
                                                 </ul>
                                             </div>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link" href="@Url.Action("Index", "Roles")">
-                                                <i class="fa-solid fa-magnifying-glass-chart menu-icon"></i>
-                                                <span class="menu-title">Roles</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="@Url.Action("Index", "Users")">
+                                            <a class="nav-link" href="@Url.Action("Myusers", "Users")">
                                                 <i class="fa-solid fa-users-line  menu-icon"></i>
-                                                <span class="menu-title">Users</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="@Url.Action("Index", "Unit")">
-                                                <i class="fa-solid fa-users-gear menu-icon"></i>
-                                                <span class="menu-title">Units</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="@Url.Action("Index", "UsersRoles")">
-                                                <i class="fa-solid fa-magnifying-glass menu-icon"></i>
-                                                <span class="menu-title">User Roles</span>
+                                                <span class="menu-title">Unit Users</span>
                                             </a>
                                         </li>
 
@@ -350,6 +311,91 @@
                                     break;
                                 case 4:
                                     {
+
+                                    }
+                                    break;
+                                case 5:
+                                    {
+                                        //super admin
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("index", "SuperAdmin")">
+                                                <i class="fa-solid fa-users-line  menu-icon"></i>
+                                                <span class="menu-title">Manage Users</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("index", "UnitAdmin")">
+                                                <i class="fa-solid fa-users-line  menu-icon"></i>
+                                                <span class="menu-title">Manage Units</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("Index", "Unit")">
+                                                <i class="fa-solid fa-users-gear menu-icon"></i>
+                                                <span class="menu-title">Units</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("Index", "UsersRoles")">
+                                                <i class="fa-solid fa-magnifying-glass menu-icon"></i>
+                                                <span class="menu-title">Manage Roles</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("Index", "Roles")">
+                                                <i class="fa-solid fa-magnifying-glass-chart menu-icon"></i>
+                                                <span class="menu-title">Roles</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic6">
+                                                <i class="fa-solid fa-list-check menu-icon"></i>
+                                                <span class="menu-title">ToDoList</span>
+                                                <i class="menu-arrow"></i>
+                                            </a>
+
+                                            <div class="collapse" id="ui-basic6">
+                                                <ul class="nav flex-column sub-menu">
+                                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index", "GeneralToDoList")">Admin</a></li>
+                                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("AllToDos", "GeneralToDoList")"> All ToDos</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="collapse" href="#ui-basic5" aria-expanded="false" aria-controls="ui-basic5">
+                                                <i class="fa-solid fa-folder-closed menu-icon"></i>
+                                                <span class="menu-title">Report</span>
+                                                <i class="menu-arrow"></i>
+                                            </a>
+
+                                            <div class="collapse" id="ui-basic5">
+                                                <ul class="nav flex-column sub-menu">
+                                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index", "UserReports")">ALL Reports</a></li>
+                                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Myreports", "UserReports")"> My Reports</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic7">
+                                                <i class="fa-solid fa-list-check menu-icon"></i>
+                                                <span class="menu-title"> Tasks</span>
+                                                <i class="menu-arrow"></i>
+                                            </a>
+
+                                            <div class="collapse" id="ui-basic7">
+                                                <ul class="nav flex-column sub-menu">
+                                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Mytask", "Tasks") ">My tasks</a></li>
+
+                                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index", "Tasks") ">Task settings</a></li>
+                                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("AllTasks", "Tasks") ">All Tasks</a></li>
+
+                                                </ul>
+                                            </div>
+                                        </li>
+
 
                                     }
                                     break;
@@ -437,8 +483,6 @@
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
 
-
-    
 
     }
     else

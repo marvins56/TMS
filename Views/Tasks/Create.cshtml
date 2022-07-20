@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-@if (Session["urserrole"].Equals(2))
+@if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
 {
 
     if (ViewBag.sessiondataaccess != null)

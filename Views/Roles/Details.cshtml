@@ -4,23 +4,40 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
+{
 
-<div>
-    <h4>RolesTable</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RoleName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.RoleName)
-        </dd>
+    <div>
+        <h4>RolesTable</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.RoleName)
+            </dt>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RolesId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            <dd>
+                @Html.DisplayFor(model => model.RoleName)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.RolesId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+else
+{
+    <div class="card text-center  mt-100">
+        <div class="card-header bg-danger text-white">Notification</div>
+        <div class="card-body">
+            <h5 class="card-title">NOT AUTHORISED</h5>
+            <p class="card-text">  access denied</p>
+
+
+        </div>
+        <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Home")" class="btn btn-outline-primary text-black"> <i class="fa-solid fa-house-circle-check"></i></a></div>
+    </div>
+
+}

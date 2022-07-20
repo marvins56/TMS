@@ -143,15 +143,22 @@ namespace TMS.Controllers
 
             return View();
         }
+    
+        public ActionResult Myusers( )
+        {
+            int uid = Convert.ToInt32(Session["userunit"]);
 
+            var results = db.UnitAdminTables.Where(i => i.UnitId == uid).ToList();
+
+            return View(results);
+
+        }
 
         // GET: Users/Create
         public ActionResult Registration()
         {
             return View();
         }
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Registration([Bind(Exclude = "IsEmailVerified,ActivationCode")] UsersTable users)
@@ -272,7 +279,8 @@ namespace TMS.Controllers
                     var usernames = db.UsersTables.Where(a => a.Email == loginuser.Email && a.IsEmailVerified == status1).Select(a => a.Username).FirstOrDefault();
                     var userId = db.UsersTables.Where(a => a.Email == loginuser.Email && a.IsEmailVerified == status1).Select(a => a.Userid).FirstOrDefault();
                     var userrole = db.UsersRolesTables.Where(a => a.Userid == userId).Select(a => a.RolesId).FirstOrDefault();
-                   
+                    var userunit = db.UnitAdminTables.Where(a => a.Userid == userId).Select(a => a.UnitId).FirstOrDefault();
+
                     if (v != null)
                     {
 
@@ -328,6 +336,13 @@ namespace TMS.Controllers
                             Session["myToDotasks"] = db.GeneralToDoListTables.Where(i => i.UserName == userId).Count();
                             Session["allreports"] = db.UserReportsTables.Count();
                             Session["myreports"] = db.UserReportsTables.Where(i => i.Userid == userId).Count();
+                            Session["userunit"] = userunit;
+
+                            //unit sesssions
+                            Session["unit_completed"] = db.GeneralToDoListTables.Where(i => i.UnitId == userunit && i.IsTaskComplete == true).Count();
+                            Session["Unit_incompleted"] = db.GeneralToDoListTables.Where(i => i.UnitId == userunit && i.IsTaskComplete == false).Count();
+                            Session["Unit_Taskcompleted"] = db.TaskTables.Where(i => i.UnitId == userunit && i.TaskStatus == true).Count();
+                            Session["Unit_Taskincompleted"] = db.TaskTables.Where(i => i.UnitId == userunit && i.TaskStatus == false).Count();
 
                             // SESSIONS FOR REPORTS SUBMITTED
 

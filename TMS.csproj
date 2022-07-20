@@ -157,7 +157,9 @@
     <Compile Include="Controllers\PersonalToDoListController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
+    <Compile Include="Controllers\SuperAdminController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\UnitAdminController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Controllers\UserReportsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -196,6 +198,9 @@
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaskTable.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UnitAdminTable.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UnitTable.cs">
@@ -2137,8 +2142,6 @@
     <Content Include="Scripts\tinymce\langs\README.md" />
     <Content Include="Scripts\tinymce\tsconfig.json" />
     <Content Include="Views\Statistics\Index.cshtml" />
-    <Content Include="Views\Users\Create.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Tasks\Create.cshtml" />
@@ -2168,6 +2171,21 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Home\UserManual.cshtml" />
     <Content Include="Views\Home\Calender.cshtml" />
+    <Content Include="Views\SuperAdmin\Register.cshtml" />
+    <Content Include="Views\UnitAdmin\Create.cshtml" />
+    <Content Include="Views\UnitAdmin\Delete.cshtml" />
+    <Content Include="Views\UnitAdmin\Details.cshtml" />
+    <Content Include="Views\UnitAdmin\Edit.cshtml" />
+    <Content Include="Views\UnitAdmin\Index.cshtml" />
+    <Content Include="Views\Users\Myusers.cshtml" />
+    <Content Include="Views\GeneralToDoList\unittodos.cshtml" />
+    <Content Include="Views\Tasks\unittasks.cshtml" />
+    <Content Include="Views\Tasks\loneUnittask.cshtml" />
+    <Content Include="Views\GeneralToDoList\loneUnittodos.cshtml" />
+    <Content Include="Views\UnitAdmin\unitperformance.cshtml" />
+    <Content Include="Views\SuperAdmin\Index.cshtml" />
+    <Content Include="Views\SuperAdmin\Details.cshtml" />
+    <Content Include="Views\SuperAdmin\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="administrators\" />

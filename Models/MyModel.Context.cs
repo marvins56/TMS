@@ -33,5 +33,6 @@ namespace TMS.Models
         public virtual DbSet<UsersTable> UsersTables { get; set; }
         public virtual DbSet<UsersRolesTable> UsersRolesTables { get; set; }
         public virtual DbSet<UserReportsTable> UserReportsTables { get; set; }
+        public virtual DbSet<UnitAdminTable> UnitAdminTables { get; set; }
     }
 }

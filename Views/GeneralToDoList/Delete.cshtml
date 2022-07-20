@@ -4,141 +4,146 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+@if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
+{
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>GeneralToDoListTable</h4>
+        <hr />
+        <dl class="dl-horizontal">
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>GeneralToDoListTable</h4>
-    <hr />
-    <dl class="dl-horizontal">
-       
+            <dt>
+                @Html.DisplayNameFor(model => model.UsersTable.Username)
+            </dt>
 
+            <dd>
+                @Html.DisplayFor(model => model.UsersTable.Username)
+            </dd>
 
+        </dl>
 
-        <
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UsersTable.Username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UsersTable.Username)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
-</div>
-
-
-
-<div class="jumbotron">
-
-
-    <div class="card text-center">
-
-        <div class="card-body">
-
-            <div class=" table-responsive">
-
-                <hr />
-
-                <table class="table table-striped display expandable-table" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th scope="col">  @Html.DisplayNameFor(model => model.TaskName)</th>
-                            <th scope="col">   @Html.DisplayNameFor(model => model.TaskFeedBack)</th>
-                            <th scope="col">  @Html.DisplayNameFor(model => model.IsTaskComplete)</th>
-                            <th scope="col">@Html.DisplayNameFor(model => model.CompletionDate)</th>
-                            <th scope="col"> @Html.DisplayNameFor(model => model.TaskTable.TaskName)</th>
-                            <th scope="col">   @Html.DisplayNameFor(model => model.UnitTable.UnitName)</th>
-                          
-                            <th scope="col">    @Html.DisplayNameFor(model => model.UsersTable.Username)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="col">  @Html.DisplayNameFor(model => model.TaskName)</td>
-                            <td scope="col">   @Html.DisplayNameFor(model => model.TaskFeedBack)</td>
-                            <td scope="col">
-                                @if (Model.IsTaskComplete == true)
-                                {
-                                    <button class=" btn badge-success">@Html.DisplayFor(model => model.IsTaskComplete) Completed</button>
-                                }
-                                else
-                                {
-                                    <button class="btn badge-warning text-white">@Html.DisplayFor(model => model.IsTaskComplete) Pending </button>
-                                }
-                            </td>
-
-
-
-                       
-                            <td scope="col">@Html.DisplayNameFor(model => model.CompletionDate)</td>
-                            <td scope="col"> @Html.DisplayNameFor(model => model.TaskTable.TaskName)</td>
-                            <td scope="col">   @Html.DisplayNameFor(model => model.UnitTable.UnitName)</td>
-
-                            <td scope="col">    @Html.DisplayNameFor(model => model.UsersTable.Username)</td>
-
-
-
-                        </tr>
-
-                    </tbody>
-                </table>
-
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
             </div>
-
-
-
-        </div>
-        <div class="card-footer text-muted">
-            <div class="card-header">
-                <h3>Are you sure you want to delete this?</h3>
-
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-
-                    <div class="form-actions no-color">
-                        <input type="submit" value="Delete" class="btn btn-danger" />
-                        @if (Session["userId"] != null)
-                        {
-                            if (Session["userId"].Equals(1))
-                            {
-                                <a class="btn btn-outline-primary" href=" @Url.Action("MyToDo", "GeneralToDoList")"> View Changes</a>
-
-
-                            }
-                            else
-                            {
-                                <a class="btn btn-outline-primary" href=" @Url.Action("Index", "GeneralToDoList")"> BACK</a>
-
-                            }
-                        }
-                        else
-                        {
-                            <p class="text-danger"> SESSION NOT SET</p>
-                        }
-
-                    </div>
-                }
-
-            </div>
-        </div>
+        }
     </div>
 
 
 
+    <div class="jumbotron">
 
-</div>
+
+        <div class="card text-center">
+
+            <div class="card-body">
+
+                <div class=" table-responsive">
+
+                    <hr />
+
+                    <table class="table table-striped display expandable-table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th scope="col">  @Html.DisplayNameFor(model => model.TaskName)</th>
+                                <th scope="col">   @Html.DisplayNameFor(model => model.TaskFeedBack)</th>
+                                <th scope="col">  @Html.DisplayNameFor(model => model.IsTaskComplete)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.CompletionDate)</th>
+                                <th scope="col"> @Html.DisplayNameFor(model => model.TaskTable.TaskName)</th>
+                                <th scope="col">   @Html.DisplayNameFor(model => model.UnitTable.UnitName)</th>
+
+                                <th scope="col">    @Html.DisplayNameFor(model => model.UsersTable.Username)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="col">  @Html.DisplayNameFor(model => model.TaskName)</td>
+                                <td scope="col">   @Html.DisplayNameFor(model => model.TaskFeedBack)</td>
+                                <td scope="col">
+                                    @if (Model.IsTaskComplete == true)
+                                    {
+                                        <button class=" btn badge-success">@Html.DisplayFor(model => model.IsTaskComplete) Completed</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn badge-warning text-white">@Html.DisplayFor(model => model.IsTaskComplete) Pending </button>
+                                    }
+                                </td>
+
+
+
+
+                                <td scope="col">@Html.DisplayNameFor(model => model.CompletionDate)</td>
+                                <td scope="col"> @Html.DisplayNameFor(model => model.TaskTable.TaskName)</td>
+                                <td scope="col">   @Html.DisplayNameFor(model => model.UnitTable.UnitName)</td>
+
+                                <td scope="col">    @Html.DisplayNameFor(model => model.UsersTable.Username)</td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+
+            </div>
+            <div class="card-footer text-muted">
+                <div class="card-header">
+                    <h3>Are you sure you want to delete this?</h3>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                            @if (Session["userId"] != null)
+                            {
+                                if (Session["userId"].Equals(1))
+                                {
+                                    <a class="btn btn-outline-primary" href=" @Url.Action("MyToDo", "GeneralToDoList")"> View Changes</a>
+
+
+                                }
+                                else
+                                {
+                                    <a class="btn btn-outline-primary" href=" @Url.Action("Index", "GeneralToDoList")"> BACK</a>
+
+                                }
+                            }
+                            else
+                            {
+                                <p class="text-danger"> SESSION NOT SET</p>
+                            }
+
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+else
+{
+    <div class="card text-center  mt-100">
+        <div class="card-header bg-danger text-white">Notification</div>
+        <div class="card-body">
+            <h5 class="card-title">NOT AUTHORISED</h5>
+            <p class="card-text">  access denied</p>
+
+
+        </div>
+        <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Home")" class="btn btn-outline-primary text-black"> <i class="fa-solid fa-house-circle-check"></i></a></div>
+    </div>
+
+}
 
 

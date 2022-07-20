@@ -1,0 +1,34 @@
+﻿@model TMS.Models.UnitAdminTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UnitAdminTable</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitTable.UnitName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitTable.UnitName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsersTable.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsersTable.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UnitAdminid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

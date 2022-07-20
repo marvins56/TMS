@@ -1,8 +1,4 @@
-﻿@model IEnumerable<TMS.Models.UsersRolesTable>
-
-@{
-    ViewBag.Title = "Index";
-}
+﻿@model IEnumerable<TMS.Models.UnitAdminTable>
 @if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
 {
 
@@ -10,55 +6,58 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title">
-                        All submitted reports
 
-                        <a href="@Url.Action("Create", "UsersRoles")" class="btn btn-social-icon btn-outline-primary float-right">
-                            <i class="fa-solid fa-plus fa-4x pt-3"></i>
-                        </a>
-                    </p>
+                    @if (Session["urserrole"].Equals(5))
+                    {
+                        <p class="card-title">
+                            ALL USERS
+
+                            <a href="@Url.Action("Register", "SuperAdmin")" class="btn btn-social-icon btn-outline-primary float-right">
+                                <i class="fa-solid fa-plus fa-4x pt-3"></i>
+                            </a>
+                        </p>
+                    }
+
                     <div class="row">
                         <div class="col-12">
                             <div class="table-responsive">
                                 <table class="display expandable-table" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.RolesTable.RoleName)
-                                            </th>
+
                                             <th>
                                                 @Html.DisplayNameFor(model => model.UsersTable.Username)
                                             </th>
-                                            <th>ACTION</th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.UnitTable.UnitName)
+                                            </th>
+                                            <th> USER ACTION</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         @foreach (var item in Model)
                                         {
                                             <tr>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.RolesTable.RoleName)
-                                                </td>
-                                                <td>
                                                     @Html.DisplayFor(modelItem => item.UsersTable.Username)
                                                 </td>
                                                 <td>
-                                                    <a href="@Url.Action("Edit", "UsersRoles", new { id = item.UsersRolesID  })" class="btn btn-inverse-primary">
-                                                        <i class="fa-solid fa-pen-to-square menu-icon"></i>
+                                                    @Html.DisplayFor(modelItem => item.UnitTable.UnitName)
+                                                </td>
+                                                <td>
+
+                                                    <a href="@Url.Action("Details", "Users", new { id = item.Userid})" class="btn btn-inverse-success">
+                                                        <i class="fa-solid fa-eye "></i>
 
                                                     </a>
 
-                                                    <a href="@Url.Action("Delete", "UsersRoles", new { id = item.UsersRolesID  })" class="btn btn-inverse-danger">
-                                                        DEACTIVATE
-
+                                                    <a href="@Url.Action("Userperformance", "Users", new { sessionid = item.Userid })" class="btn btn-inverse-primary">
+                                                        <i class="fa-solid fa-chart-pie"></i>
                                                     </a>
-
 
                                                 </td>
                                             </tr>
                                         }
-
                                     </tbody>
                                 </table>
                             </div>
@@ -70,6 +69,7 @@
 
         </div>
     </div>
+
 
 }
 else

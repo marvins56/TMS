@@ -217,6 +217,22 @@ namespace TMS.Controllers
             return View(taskTables.ToList());
         }
 
+        public ActionResult unittasks()
+        {
+            int uid = Convert.ToInt32(Session["userunit"]);
+            var results = db.TaskTables.Where(i => i.UnitId == uid).ToList();
+            return View(results);
+        }
+
+        //admin tasks for a unit
+          public ActionResult loneUnittask(int id)
+        {
+            var results = db.TaskTables.Where(i => i.UnitId == id).ToList();
+
+            Session["countTaskcompleted"] = db.TaskTables.Where(i => i.UnitId == id && i.TaskStatus == true).Count();
+            Session["countTaskincompleted"] = db.TaskTables.Where(i => i.UnitId == id && i.TaskStatus == false).Count();
+            return View(results);
+        }
         //function to send email
         [NonAction]
         public void SendTaskEmail(string emailId, string usernames, DateTime start, DateTime setdeadline, string task)

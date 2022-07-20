@@ -51,11 +51,23 @@ namespace TMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.UnitTables.Add(unitTable);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
+              var unitidexixts =  unitexixts(unitTable.UnitId);
+
+                if (unitidexixts)
+                {
+                    ModelState.AddModelError("unitidexixtx", "Unit id exixts");
+                    ViewBag.unitexitxt = "user id already exists"
+;                }
+                else
+                {
+                    db.UnitTables.Add(unitTable);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            
+              
+            }
             return View(unitTable);
         }
 
@@ -77,6 +89,7 @@ namespace TMS.Controllers
         // POST: Unit/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UnitId,UnitName")] UnitTable unitTable)
@@ -115,7 +128,15 @@ namespace TMS.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        [NonAction]
+        public bool unitexixts(int id)
+        {
+            using (db = new TMSEntities1())
+            {
+                var v = db.UnitTables.Where(a => a.UnitId.Equals(id)).FirstOrDefault();
+                return v != null;
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

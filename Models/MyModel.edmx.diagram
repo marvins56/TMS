@@ -22,6 +22,9 @@
         <EntityTypeShape EntityType="TMSModel.UserReportsTable" Width="1.5" PointX="11" PointY="1.75" />
         <AssociationConnector Association="TMSModel.fk_Usersreportstasks" />
         <AssociationConnector Association="TMSModel.fk_Usersreports" />
+        <EntityTypeShape EntityType="TMSModel.UnitAdminTable" Width="1.5" PointX="1" PointY="1.875" />
+        <AssociationConnector Association="TMSModel.fk_adminunitroles" />
+        <AssociationConnector Association="TMSModel.fk_useradminroleunit" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

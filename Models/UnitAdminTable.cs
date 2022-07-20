@@ -11,14 +11,17 @@ namespace TMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class UsersRolesTable
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class UnitAdminTable
     {
-        public int UsersRolesID { get; set; }
+        public int UnitAdminid { get; set; }
+        [Display(Name = "User Name ")]
         public int Userid { get; set; }
-        public Nullable<int> RolesId { get; set; }
+        [Display(Name = "User Unit ")]
+        public int UnitId { get; set; }
     
-        public virtual RolesTable RolesTable { get; set; }
+        public virtual UnitTable UnitTable { get; set; }
         public virtual UsersTable UsersTable { get; set; }
     }
 }

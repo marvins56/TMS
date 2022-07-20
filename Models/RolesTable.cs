@@ -20,11 +20,9 @@ namespace TMS.Models
         {
             this.UsersRolesTables = new HashSet<UsersRolesTable>();
         }
-        [Display(Name = "User Role")]
+    
         public int RolesId { get; set; }
-
         [Display(Name = "Role Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Role Name field required")]
         public string RoleName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

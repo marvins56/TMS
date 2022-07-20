@@ -21,6 +21,7 @@ namespace TMS.Models
             this.TaskTables = new HashSet<TaskTable>();
             this.UsersRolesTables = new HashSet<UsersRolesTable>();
             this.UserReportsTables = new HashSet<UserReportsTable>();
+            this.UnitAdminTables = new HashSet<UnitAdminTable>();
         }
     
         public int Userid { get; set; }
@@ -40,5 +41,7 @@ namespace TMS.Models
         public virtual ICollection<UsersRolesTable> UsersRolesTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserReportsTable> UserReportsTables { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnitAdminTable> UnitAdminTables { get; set; }
     }
 }

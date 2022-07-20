@@ -11,30 +11,16 @@ namespace TMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web;
-
+    
     public partial class UserReportsTable
     {
         public int Reportid { get; set; }
-
-        [Display(Name = "USER SUBMITTING REPORT")]
-       
+        
         public int Userid { get; set; }
-        [Display(Name = "Task Reference")]
-     
-
         public int TaskId { get; set; }
-
-        [Display(Name = "Report Name")]
-       
-        public string Title { get; set; }
-        [Display(Name ="Download Report Document")]
-      
         public string Report { get; set; }
-
-
+        public string Title { get; set; }
+    
         public virtual TaskTable TaskTable { get; set; }
         public virtual UsersTable UsersTable { get; set; }
     }

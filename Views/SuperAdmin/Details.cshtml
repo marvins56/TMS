@@ -1,0 +1,59 @@
+﻿@model TMS.Models.UsersTable
+<div class="jumbotron">
+
+    <div class="card text-center">
+        <div class="card-header">
+           USER DETAILS
+        </div>
+        <div class="card-body">
+
+            <div class=" table-responsive">
+
+                <hr />
+
+                <table class="table table-striped display expandable-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.Username)</th>
+                            <th scope="col">    @Html.DisplayNameFor(model => model.Email)</th>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.DOB)</th>
+                            <th scope="col">    @Html.DisplayNameFor(model => model.IsEmailVerified)</th>
+                    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="col">  @Html.DisplayFor(model => model.Username)</td>
+                            <td scope="col">    @Html.DisplayFor(model => model.Email)</td>
+                            <td scope="col">  @Html.DisplayFor(model => model.DOB)</td>
+                     
+                            <td scope="col">
+                                @if (Model.IsEmailVerified == true)
+                                {
+                                    <button class=" btn badge-success"> VERIFIED</button>
+                                }
+                                else
+                                {
+                                    <button class="btn badge-danger text-white"> NON - VERIFIED </button>
+                                }
+                            </td>
+                          
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div style="margin-top:10px;">
+                <p>
+                        <a class="btn btn-outline-primary" href=" @Url.Action("Index", "Users" )"> BACK</a>
+                    
+                </p>
+            </div>
+
+
+        </div>
+      
+    </div>
+
+</div>

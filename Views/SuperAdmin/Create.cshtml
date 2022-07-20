@@ -1,13 +1,11 @@
 ﻿@model TMS.Models.UsersTable
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-
-@if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
+@if (Session["urserrole"].Equals(5))
 {
-
 
 
     using (Html.BeginForm())
@@ -18,8 +16,6 @@
             <h4>UsersTable</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Userid)
-
             <div class="form-group">
                 @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -78,11 +74,17 @@
                 </div>
             </div>
 
-         
+            <div class="form-group">
+                @Html.LabelFor(model => model.RoleId, "RoleId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("RoleId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -91,6 +93,8 @@
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
+
+
 
 }
 else
@@ -107,7 +111,6 @@ else
     </div>
 
 }
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

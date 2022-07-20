@@ -12,6 +12,7 @@ namespace TMS.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     public partial class TaskTable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,31 +21,41 @@ namespace TMS.Models
             this.GeneralToDoListTables = new HashSet<GeneralToDoListTable>();
             this.UserReportsTables = new HashSet<UserReportsTable>();
         }
+    
         public int TaskId { get; set; }
         public int UserId { get; set; }
         [Display(Name = "Task Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Role Name field required")]
+        [DataType(DataType.MultilineText)]
+        [MaxLength(20, ErrorMessage = "please give a shorter sentence")]
+        [MinLength(6, ErrorMessage = "minimum characters are 6 please try again")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = " TaskName field required")]
         public string TaskName { get; set; }
-        [Display(Name = "TASK RESULTS / FEEDBACK")]
+        [Display(Name = " Task FeedBack")]
         [DataType(DataType.MultilineText)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "FEEDBACK field required")]
+        [MaxLength(20, ErrorMessage = "please give a shorter sentence")]
+        [MinLength(6, ErrorMessage = "minimum characters are 6 please try again")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = " FeedBack field required")]
         public string FeedBack { get; set; }
-        [Display(Name = "Task Description")]
+        [Display(Name = " Task Description")]
         [DataType(DataType.MultilineText)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Description field required")]
+        [MaxLength(20, ErrorMessage = "please give a shorter sentence")]
+        [MinLength(6, ErrorMessage = "minimum characters are 6 please try again")]
+        
         public string BodyContent { get; set; }
         public bool TaskStatus { get; set; }
-        [Display(Name = "Task Start Time")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = " Task Start Time field required")]
+        [Display(Name = "Task start time ")]
         [DataType(DataType.Date)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = " deadline field required")]
+
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime TastStartTime { get; set; }
-        [Display(Name = "Task End Time")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = " Deadline field required")]
+        [Display(Name = "Task deadline ")]
         [DataType(DataType.Date)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = " deadline field required")]
+
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime TaskEndTime { get; set; }
-        [Display(Name = "Unit Name")]
+        [Display(Name = "User Unit ")]
         public int UnitId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -16,16 +16,15 @@ namespace TMS.Models
     public partial class PersonalToDoListTable
     {
         public int PToDoListId { get; set; }
-
-        [Display(Name = "User Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = " User Name field required")]
-   
         public string UserName { get; set; }
-        [Display(Name = "Task Name ")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = " Task Namefield required")]
+        [Display(Name = "Task Name")]
+        [MaxLength(20, ErrorMessage = "please give a shorter sentence")]
+        [MinLength(6, ErrorMessage = "minimum characters are 6 please try again")]
         public string TaskName { get; set; }
-        [Display(Name = "Task Feedback")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = " TaskFeedbackfield required")]
+        [Display(Name = "Task description")]
+        [DataType(DataType.MultilineText)]
+        [MaxLength(20, ErrorMessage = "please give a shorter sentence")]
+        [MinLength(6, ErrorMessage = "minimum characters are 6 please try again")]
         public string TaskFeedback { get; set; }
     }
 }

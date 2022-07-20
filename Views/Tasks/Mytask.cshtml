@@ -11,7 +11,7 @@
             <p class="card-text">  @TempData["sessiondataaccess"]</p>
 
         </div>
-        @if (Session["urserole"].Equals(2))
+        @if (Session["urserole"].Equals(2) || Session["urserrole"].Equals(5))
         {
 
             <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Tasks")" class="btn btn-outline-primary text-black"> BACK TO TASKS </a></div>
@@ -42,7 +42,7 @@ else
                     <p class="card-text">  @TempData["emailstatus"]</p>
 
                 </div>
-                @if (Session["urserrole"].Equals(2))
+                @if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
                 {
                     <div class="card-footer text-muted"> <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
 
@@ -194,7 +194,7 @@ else
                 <p class="card-text">  @TempData["emailerror"]</p>
 
             </div>
-            @if (Session["urserrole"].Equals(2))
+            @if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
             {
                 <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
 

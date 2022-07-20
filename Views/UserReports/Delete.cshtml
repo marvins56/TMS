@@ -4,82 +4,95 @@
     ViewBag.Title = "Delete";
 }
 
+@if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
+{
+
+    <div class="jumbotron">
+        <div class="card text-center">
+
+            <div class="card-body">
+
+                <div class=" table-responsive">
+
+                    <hr />
+
+                    <table class="table table-striped display expandable-table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th scope="col">    @Html.DisplayNameFor(model => model.Report)</th>
+                                <th scope="col">   @Html.DisplayNameFor(model => model.Title)</th>
+                                <th scope="col">    @Html.DisplayNameFor(model => model.TaskTable.TaskName)</th>
+                                <th scope="col">    @Html.DisplayNameFor(model => model.UsersTable.Username)</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="col">
+                                    <a href="@Url.Action("DownloadFile", "UserReports", new { fileName = Model.Report })" class="btn btn-inverse-primary">
+                                        <i class="fa-solid fa-file-circle-check menu-icon"></i>
+                                    </a>
+                                </td>
+                                <td scope="col">   @Html.DisplayFor(model => model.Title)</td>
+                                <td scope="col">    @Html.DisplayFor(model => model.TaskTable.TaskName)</td>
+                                <td scope="col">    @Html.DisplayFor(model => model.UsersTable.Username)</td>
 
 
-<div class="jumbotron">
-    <div class="card text-center">
 
-        <div class="card-body">
+                            </tr>
 
-            <div class=" table-responsive">
+                        </tbody>
+                    </table>
 
-                <hr />
-
-                <table class="table table-striped display expandable-table" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th scope="col">    @Html.DisplayNameFor(model => model.Report)</th>
-                            <th scope="col">   @Html.DisplayNameFor(model => model.Title)</th>
-                            <th scope="col">    @Html.DisplayNameFor(model => model.TaskTable.TaskName)</th>
-                            <th scope="col">    @Html.DisplayNameFor(model => model.UsersTable.Username)</th>
-
-
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="col">
-                                <a href="@Url.Action("DownloadFile", "UserReports", new { fileName = Model.Report })" class="btn btn-inverse-primary">
-                                    <i class="fa-solid fa-file-circle-check menu-icon"></i>
-                                </a>
-                            </td>
-                            <td scope="col">   @Html.DisplayFor(model => model.Title)</td>
-                            <td scope="col">    @Html.DisplayFor(model => model.TaskTable.TaskName)</td>
-                            <td scope="col">    @Html.DisplayFor(model => model.UsersTable.Username)</td>
-
-
-
-                        </tr>
-
-                    </tbody>
-                </table>
+                </div>
 
             </div>
+            <div class="card-footer text-muted">
+                <div class="card-header">
+                    <h3>DELETE  SUBMITTED REPORT / RECIEVED.</h3>
+                    <p class="text-success">Once the report is deleted, this action also <span class="text-danger"> <em> DELETES </em></span>the submitted report in the supervisors space</p>
 
-        </div>
-        <div class="card-footer text-muted">
-            <div class="card-header">
-                <h3>DELETE  SUBMITTED REPORT.</h3>
-                <p class="text-success">Once the report is deleted, this action also <span class="text-danger"> <em> DELETES </em></span>the submitted report in the supervisors space</p>
-
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
 
 
-            <div class="form-actions no-color">
-                <input type="submit" value="Retrive" class="btn btn-danger" />
-                @if (Session["urserrole"].Equals(2))
-                {
-                    <a class="btn btn-outline-primary" href=" @Url.Action("Index", "UserReports")"> BACK</a>
-                }
-                else
-                {
-                    <a class="btn btn-outline-primary" href=" @Url.Action("Myreports", "UserReports")"> BACK</a>
-                }
-            </div>
-                }
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Retrive" class="btn btn-danger" />
+                            @if (Session["urserrole"].Equals(2))
+                            {
+                                <a class="btn btn-outline-primary" href=" @Url.Action("Index", "UserReports")"> BACK</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-outline-primary" href=" @Url.Action("Myreports", "UserReports")"> BACK</a>
+                            }
+                        </div>
+                    }
 
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
+}
+else
+{
+    <div class="card text-center  mt-100">
+        <div class="card-header bg-danger text-white">Notification</div>
+        <div class="card-body">
+            <h5 class="card-title">NOT AUTHORISED</h5>
+            <p class="card-text">  access denied</p>
 
+
+        </div>
+        <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Home")" class="btn btn-outline-primary text-black"> <i class="fa-solid fa-house-circle-check"></i></a></div>
+    </div>
+
+}
 
 
 

@@ -23,6 +23,9 @@ namespace TMS.Models
     
         public int RolesId { get; set; }
         [Display(Name = "Role Name")]
+        [MaxLength(20, ErrorMessage = "please give a shorter sentence")]
+        [MinLength(6, ErrorMessage = "minimum characters are 6 please try again")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = " Role Name field required")]
         public string RoleName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

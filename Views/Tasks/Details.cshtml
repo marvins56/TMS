@@ -62,14 +62,17 @@
             <div style="margin-top:10px;">
                 <p>
                     <a class="btn btn-primary" href=" @Url.Action("Edit", "Tasks", new { id = Model.TaskId })"> Edit </a>
-                    @if ((Session["urserrole"].Equals(1)))
+                    @if (Session["urserrole"].Equals(2))
                     {
-                        <a class="btn btn-outline-primary" href=" @Url.Action("Mytask", "Tasks", new { id = Model.TaskId })"> BACK</a>
+                        <div class="card-footer text-muted"> <a href="@Url.Action("unittasks","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+                    }
+                    else if (Session["urserrole"].Equals(5))
+                    {
+                        <div class="card-footer text-muted"> <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
                     }
                     else
                     {
-                        <a class="btn btn-outline-primary" href=" @Url.Action("AllTasks", "Tasks", new { id = Model.TaskId })"> All List</a>
-
+                        <div class="card-footer text-muted"> <a href="@Url.Action("Mytask","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
                     }
                 </p>
             </div>

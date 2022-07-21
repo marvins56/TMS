@@ -7,24 +7,28 @@
 
     if (TempData["savingerror"] != null)
     {
-        <div class="card text-center  mt-100">
-            <div class="card-header bg-danger text-white">Notification</div>
-            <div class="card-body">
-                <h5 class="card-title "> ERROR WHILE SAVING</h5>
-                <p class="card-text">  @TempData["savingerror"]</p>
-
-            </div>
-
-            @if (Session["urserrole"].Equals(2))
-            {
-                <div class="card-footer text-muted"> <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
-            }
-            else
-            {
-                <div class="card-footer text-muted"> <a href="@Url.Action("Mytask","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
-            }
+    <div class="card text-center  mt-100">
+        <div class="card-header bg-danger text-white">Notification</div>
+        <div class="card-body">
+            <h5 class="card-title "> ERROR WHILE SAVING</h5>
+            <p class="card-text">  @TempData["savingerror"]</p>
 
         </div>
+
+        @if (Session["urserrole"].Equals(2))
+        {
+            <div class="card-footer text-muted"> <a href="@Url.Action("unittasks","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+        }
+        else if (Session["urserrole"].Equals(5))
+        {
+            <div class="card-footer text-muted"> <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+        }
+        else 
+        {
+            <div class="card-footer text-muted"> <a href="@Url.Action("Mytask","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+        }
+
+    </div>
 
     }
     else

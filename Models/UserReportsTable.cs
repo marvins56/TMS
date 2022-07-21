@@ -24,7 +24,7 @@ namespace TMS.Models
         public string Report { get; set; }
         [Display(Name = "Report Title ")]
         [Required(AllowEmptyStrings = false, ErrorMessage = " Title field required")]
-        [MaxLength(10, ErrorMessage = "20 characterss max, please try again")]
+        [MaxLength(20, ErrorMessage = "20 characterss max, please try again")]
         public string Title { get; set; }
     
         public virtual TaskTable TaskTable { get; set; }

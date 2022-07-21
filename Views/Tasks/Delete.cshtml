@@ -69,28 +69,26 @@
                     {
                         @Html.AntiForgeryToken()
 
-                        <div class="form-actions no-color">
-                            <input type="submit" value="Delete" class="btn btn-danger" />
-                            @if (Session["userId"] != null)
-                            {
-                                if (Session["urserrole"].Equals(1))
-                                {
-                                    <a class="btn btn-outline-primary" href=" @Url.Action("Mytask", "Tasks")"> View Changes</a>
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    @if (Session["userId"] != null)
+                    {
+                        @if (Session["urserrole"].Equals(2))
+                        {
+                            <div class="card-footer text-muted"> <a href="@Url.Action("unittasks","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+                        }
+                        else if (Session["urserrole"].Equals(5))
+                        {
+                            <div class="card-footer text-muted"> <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+                        }
+                       
+                    }
+                    else
+                    {
+                        <p class="text-danger"> SESSION NOT SET</p>
+                    }
 
-
-                                }
-                                else
-                                {
-                                    <a class="btn btn-outline-primary" href=" @Url.Action("Index", "Tasks")"> BACK</a>
-
-                                }
-                            }
-                            else
-                            {
-                                <p class="text-danger"> SESSION NOT SET</p>
-                            }
-
-                        </div>
+                </div>
                     }
 
                 </div>

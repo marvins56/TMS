@@ -20,15 +20,17 @@
                     <p class="card-text">   @TempData["savingerror"]  </p>
 
                 </div>
-                @if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
+                @if (Session["urserrole"].Equals(2))
                 {
-                    <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
-
+                    <div class="card-footer text-muted"> <a href="@Url.Action("unittasks","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+                }
+                else if (Session["urserrole"].Equals(5))
+                {
+                    <div class="card-footer text-muted"> <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
                 }
                 else
                 {
-                    <div class="card-footer text-muted"> <a href="@Url.Action("Mytask", "Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
-
+                    <div class="card-footer text-muted"> <a href="@Url.Action("Mytask","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
                 }
 
             </div>
@@ -39,26 +41,29 @@
 
             if (TempData["emailstatus"] != null)
             {
-                <div class="card text-center  mt-100">
-                    <div class="card-header bg-success text-white">Notification</div>
-                    <div class="card-body">
-                        <h5 class="card-title ">TASK CONFIRMATION</h5>
-                        <p class="card-text">  @TempData["emailstatus"]</p>
+<div class="card text-center  mt-100">
+    <div class="card-header bg-success text-white">Notification</div>
+    <div class="card-body">
+        <h5 class="card-title ">TASK CONFIRMATION</h5>
+        <p class="card-text">  @TempData["emailstatus"]</p>
 
-                    </div>
-                    @if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
-                    {
-                        <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+    </div>
+    @if (Session["urserrole"].Equals(2))
+    {
+        <div class="card-footer text-muted"> <a href="@Url.Action("unittasks","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+    }
+    else if (Session["urserrole"].Equals(5))
+    {
+        <div class="card-footer text-muted"> <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+    }
+    else
+    {
+        <div class="card-footer text-muted"> <a href="@Url.Action("Mytask","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+    }
 
-                    }
-                    else
-                    {
-                        <div class="card-footer text-muted"> <a href="@Url.Action("Mytask", "Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
-
-                    }
 
 
-                </div>
+</div>
 
             }
             else

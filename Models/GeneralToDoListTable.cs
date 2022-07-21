@@ -22,11 +22,13 @@ namespace TMS.Models
         [DataType(DataType.MultilineText)]
         [MaxLength(20, ErrorMessage = "please give a shorter sentence")]
         [MinLength(6, ErrorMessage = "minimum characters are 6 please try again")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = " TaskName field required")]
         public string TaskName { get; set; }
         [Display(Name = "Task FeedBack ")]
         [DataType(DataType.MultilineText)]
         [MaxLength(20, ErrorMessage = "please give a shorter sentence")]
         [MinLength(6, ErrorMessage = "minimum characters are 6 please try again")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = " TaskFeedBack field required")]
         public string TaskFeedBack { get; set; }
         [Display(Name = "Task Refrence ")]
         

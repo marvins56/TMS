@@ -40,7 +40,7 @@ namespace TMS.Models
         [DataType(DataType.MultilineText)]
         [MaxLength(20, ErrorMessage = "please give a shorter sentence")]
         [MinLength(6, ErrorMessage = "minimum characters are 6 please try again")]
-        
+        [Required(AllowEmptyStrings = false, ErrorMessage = " Body Content field required")]
         public string BodyContent { get; set; }
         public bool TaskStatus { get; set; }
         [Display(Name = "Task start time ")]

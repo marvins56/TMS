@@ -23,8 +23,12 @@ namespace TMS.Models
             this.UnitAdminTables = new HashSet<UnitAdminTable>();
         }
         [Display(Name = "Unit id ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = " Unit id field required ")]
+       
         public int UnitId { get; set; }
         [Display(Name = "Unit Name ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = " Unit Name field required")]
+        [MaxLength(10, ErrorMessage = "10 characterss max, please try again")]
         public string UnitName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

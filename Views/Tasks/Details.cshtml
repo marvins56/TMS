@@ -64,15 +64,15 @@
                     <a class="btn btn-primary" href=" @Url.Action("Edit", "Tasks", new { id = Model.TaskId })"> Edit </a>
                     @if (Session["urserrole"].Equals(2))
                     {
-                        <div class="card-footer text-muted"> <a href="@Url.Action("unittasks","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+                         <a href="@Url.Action("unittasks","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
                     }
                     else if (Session["urserrole"].Equals(5))
                     {
-                        <div class="card-footer text-muted"> <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+                         <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
                     }
                     else
                     {
-                        <div class="card-footer text-muted"> <a href="@Url.Action("Mytask","Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+                        <a href="@Url.Action("Mytask","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
                     }
                 </p>
             </div>

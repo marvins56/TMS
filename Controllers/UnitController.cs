@@ -49,24 +49,35 @@ namespace TMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UnitId,UnitName")] UnitTable unitTable)
         {
+            //check if data exits already
+            var v = db.UnitTables.Where(a => a.UnitId.Equals(unitTable.UnitId)).FirstOrDefault();
+            var vname = db.UnitTables.Where(a => a.UnitName == (unitTable.UnitName)).FirstOrDefault();
+
+
             if (ModelState.IsValid)
             {
-
-              var unitidexixts =  unitexixts(unitTable.UnitId);
-
-                if (unitidexixts)
+                if(v != null )
                 {
-                    ModelState.AddModelError("unitidexixtx", "Unit id exixts");
-                    ViewBag.unitexitxt = "user id already exists"
-;                }
+                    TempData["unitidexixts"] = "UNIT ID EXISTS";
+                }else if(vname != null)
+                {
+                    TempData["unitnameexixts"] = "UNIT  EXISTS";
+                }
                 else
                 {
-                    db.UnitTables.Add(unitTable);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    try
+                    {
+                        db.UnitTables.Add(unitTable);
+                        db.SaveChanges();
+
+                    }catch(Exception e)
+                    { 
+                        TempData["savinguniterror"] = e.Message;    
+                    }
                 }
-            
-              
+                   
+                    return RedirectToAction("Index");
+               
             }
             return View(unitTable);
         }
@@ -128,15 +139,7 @@ namespace TMS.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        [NonAction]
-        public bool unitexixts(int id)
-        {
-            using (db = new TMSEntities1())
-            {
-                var v = db.UnitTables.Where(a => a.UnitId.Equals(id)).FirstOrDefault();
-                return v != null;
-            }
-        }
+      
         protected override void Dispose(bool disposing)
         {
             if (disposing)

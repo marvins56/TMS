@@ -184,12 +184,12 @@
                 </div>
                 @if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
                 {
-                    <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+                     <a href="@Url.Action("Index", "Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
 
                 }
                 else
                 {
-                    <div class="card-footer text-muted"> <a href="@Url.Action("Mytask", "Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
+                  <a href="@Url.Action("Mytask", "Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
 
                 }
 

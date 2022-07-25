@@ -1954,6 +1954,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="database backup\TMS.bak" />
+    <Content Include="App_Start\images\report_documents\Usermanual.pdf" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -2186,12 +2187,12 @@
     <Content Include="Views\SuperAdmin\Index.cshtml" />
     <Content Include="Views\SuperAdmin\Details.cshtml" />
     <Content Include="Views\SuperAdmin\Create.cshtml" />
+    <Content Include="Views\SuperAdmin\_searchusers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="administrators\" />
     <Folder Include="App_Data\" />
     <Folder Include="App_Start\images\profileimages\" />
-    <Folder Include="App_Start\images\report_documents\" />
     <Folder Include="localusers\" />
     <Folder Include="Views\Account\" />
   </ItemGroup>

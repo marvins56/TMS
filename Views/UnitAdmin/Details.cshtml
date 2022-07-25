@@ -4,31 +4,54 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>UnitAdminTable</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UnitTable.UnitName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UnitTable.UnitName)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UsersTable.Username)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UsersTable.Username)
-        </dd>
 
-    </dl>
+<div class="jumbotron">
+
+    <div class="card text-center">
+        <div class="card-header">
+            USER UNIT DETAILS
+        </div>
+        <div class="card-body">
+
+            <div class=" table-responsive">
+
+                <hr />
+
+                <table class="table table-striped display expandable-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.UnitTable.UnitName)</th>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.UsersTable.Username)</th>
+                   
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="col">  @Html.DisplayFor(model => model.UnitTable.UnitName)</th>
+                            <th scope="col">  @Html.DisplayFor(model => model.UsersTable.Username)</th>
+
+                           
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div style="margin-top:10px;">
+                <p>
+                        <a href="@Url.Action("Index","UnitAdmin")" class="btn btn-outline-primary text-black"> BACK </a>
+                    
+                </p>
+            </div>
+
+
+        </div>
+
+    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UnitAdminid }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

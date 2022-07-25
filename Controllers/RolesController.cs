@@ -48,10 +48,29 @@ namespace TMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "RolesId,RoleName")] RolesTable rolesTable)
         {
+
+            //check if user has role
+            var v = db.RolesTables.Where(a => a.RoleName == rolesTable.RoleName).FirstOrDefault();
+
             if (ModelState.IsValid)
             {
-                db.RolesTables.Add(rolesTable);
-                db.SaveChanges();
+                if(v != null)
+                {
+                    TempData["roleexixts"] = "ROLE EXIST TRY AGAIN";
+                }
+                else
+                {
+                    try
+                    {
+                        db.RolesTables.Add(rolesTable);
+                        db.SaveChanges();
+                    }catch(Exception e)
+                    {
+                        TempData["savingerrors3"] = e.Message;
+                    }
+
+                }
+
                 return RedirectToAction("Index");
             }
 

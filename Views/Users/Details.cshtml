@@ -46,8 +46,17 @@
             </div>
             <div style="margin-top:10px;">
                 <p>
-                        <a class="btn btn-outline-primary" href=" @Url.Action("Index", "Users" )"> BACK</a>
                     
+                    @if (Session["urserrole"].Equals(2))
+                    {
+                        <a href="@Url.Action("Myusers","Users")" class="btn btn-outline-primary text-black"> BACK </a>
+                    }
+                    else if (Session["urserrole"].Equals(5))
+                    {
+                        <a href="@Url.Action("Index","Users")" class="btn btn-outline-primary text-black"> BACK </a>
+                    }
+                  
+
                 </p>
             </div>
 

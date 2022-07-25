@@ -292,6 +292,12 @@ namespace TMS.Controllers
             }
         }
 
+        //public PartialViewResult SearchUsers(string searchtext)
+        //{
+        //    var users = db.UsersTables.ToList();
+        //    var result = users.Where(a => a.Username.ToLower().Contains(searchtext) || a.Email.ToLower().Contains(searchtext)).ToList();
+        //    return PartialView("_searchusers", result);
+        //}
 
         protected override void Dispose(bool disposing)
         {

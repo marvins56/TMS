@@ -7,19 +7,20 @@
 
 @if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
 {
-    if (ViewBag.unitexitxt != null)
+    if (TempData["unitidexixts"] != null || TempData["unitnameexixts"] != null || TempData["savinguniterror"] != null)
     {
         <div class="card text-center  mt-100">
             <div class="card-header bg-danger text-white">Notification</div>
             <div class="card-body">
                 <h5 class="card-title">NOT AUTHORISED</h5>
-                <p class="card-text">  @ViewBag.unitexitxt</p>
 
+                <h6 class="card-text text-uppercase"> @TempData["unitidexixts"]  </h6>
+                <h6 class="card-text text-uppercase"> @TempData["unitnameexixts"] </h6>
+                <h6 class="card-text text-uppercase"> @TempData["savinguniterror"] </h6>
 
             </div>
-            <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Home")" class="btn btn-outline-primary text-black"> <i class="fa-solid fa-house-circle-check"></i></a></div>
-        </div>
-    }
+            <div class="card-footer text-muted"> <a href="@Url.Action("Index", "Unit")" class="btn btn-outline-primary text-black"> <i class="fa-solid fa-house-circle-check"></i></a></div>
+        </div> }
     else
     {
         using (Html.BeginForm())

@@ -58,17 +58,24 @@
 
 
 
-                        <div class="form-actions no-color">
-                            <input type="submit" value="Retrive" class="btn btn-danger" />
-                            @if (Session["urserrole"].Equals(2))
-                            {
-                                <a class="btn btn-outline-primary" href=" @Url.Action("Index", "UserReports")"> BACK</a>
-                            }
-                            else
-                            {
-                                <a class="btn btn-outline-primary" href=" @Url.Action("Myreports", "UserReports")"> BACK</a>
-                            }
-                        </div>
+                <div class="form-actions no-color">
+                    <input type="submit" value="Retrive" class="btn btn-danger" />
+
+                    @if (Session["urserrole"].Equals(2))
+                    {
+                        <a href="@Url.Action("Myreports","UserReports")" class="btn btn-outline-primary text-black"> BACK </a>
+                    }
+                    else if (Session["urserrole"].Equals(5))
+                    {
+                        <a href="@Url.Action("Index","UserReports")" class="btn btn-outline-primary text-black"> BACK </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Myreports","UserReports")" class="btn btn-outline-primary text-black"> BACK </a>
+                    }
+
+                 
+                </div>
                     }
 
                 </div>

@@ -55,7 +55,15 @@
                                                     @Html.DisplayFor(modelItem => item.TaskFeedBack)
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.IsTaskComplete)
+                                                    @if (item.IsTaskComplete == true)
+                                                    {
+                                                        <button class=" btn badge-success"> Completed</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button class="btn badge-warning text-white"> Pending </button>
+                                                    }
+                                                    
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.CompletionDate)

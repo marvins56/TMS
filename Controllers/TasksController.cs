@@ -223,9 +223,9 @@ namespace TMS.Controllers
             var results = db.TaskTables.Where(i => i.UnitId == uid).ToList();
             return View(results);
         }
-
+      
         //admin tasks for a unit
-          public ActionResult loneUnittask(int id)
+        public ActionResult loneUnittask(int id)
         {
             var results = db.TaskTables.Where(i => i.UnitId == id).ToList();
 
@@ -244,7 +244,7 @@ namespace TMS.Controllers
             var fromEmailPassword = "kcywjucbmujbrycc";
 
            var subject = "NEW TASK ADDED TO YOUR SPACE";
-           var body1 = " A new task has been added to your space please check for deadlines," + "<br/>"
+           var body1 = usernames + ", A new task has been added to your space please check for deadlines," + "<br/>"
 
                 + "TASK DETAILS." + "<br/>"
                 + task + "   with a deadline set from" + start + " to " + setdeadline + " KIND REGARDS...SUPERVISOR";

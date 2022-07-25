@@ -44,6 +44,7 @@ namespace TMS.Controllers
             return View();
         }
 
+      
         // POST: UsersRoles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -53,8 +54,27 @@ namespace TMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.UsersRolesTables.Add(usersRolesTable);
-                db.SaveChanges();
+                //check if user has role
+                var v = db.UsersRolesTables.Where(a => a.Userid.Equals(usersRolesTable.Userid)).FirstOrDefault();
+
+                if (v != null)
+                {
+                    TempData["assignedrole"] = "USER HAS AN ASSIGNED ROLE!! ";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    try
+                    {
+                        db.UsersRolesTables.Add(usersRolesTable);
+                        db.SaveChanges();
+                      
+                    }catch(Exception e)
+                    {
+                        TempData["savingerrors1"] = e.Message;
+                    }
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -124,6 +144,8 @@ namespace TMS.Controllers
             return RedirectToAction("Index");
         }
 
+
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

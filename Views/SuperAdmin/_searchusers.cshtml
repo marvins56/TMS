@@ -1,0 +1,72 @@
+﻿
+@model IEnumerable<TMS.Models.UsersTable>
+
+                                <table class="display expandable-table" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Username)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Email)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.DOB)
+                                            </th>
+                                       
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.IsEmailVerified)
+                                            </th>
+                                          
+
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.Count() != 0)
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Username)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Email)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.DOB)
+                                                    </td>
+
+                                                    <td>
+                                                        @if (item.IsEmailVerified == true)
+                                                        {
+                                                            <button class=" btn badge-success">  Verified</button>
+                                                        }
+                                                        else
+                                                        {
+                                                            <button class="btn badge-warning text-white">  Pending verification </button>
+                                                        }
+
+                                                    </td>                           
+                                                    <td>
+                                                        <a href="@Url.Action("Details", "Users", new { id = item.Userid })" class="btn btn-inverse-success">
+                                                            <i class="fa-solid fa-eye "></i>
+
+                                                        </a>
+
+                                                        <a href="@Url.Action("Userperformance", "Users", new { sessionid = item.Userid })" class="btn btn-inverse-primary">
+                                                            <i class="fa-solid fa-chart-pie"></i>
+
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                            }
+                }
+                else
+                {
+                                   <button class="btn btn-outline-danger text-white">  NO RESULTS FOUND </button>
+                }
+
+ 

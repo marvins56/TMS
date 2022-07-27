@@ -42,7 +42,7 @@
                 });
             };
             function RenderPage(pdf_container, num) {
-                pdfDoc.getPage(num).then(function (page) {
+                pdfDoc.getPage(num).then(function (page) { 
                     //Create Canvas element and append to the Container DIV.
                     var canvas = document.createElement('canvas');
                     canvas.id = 'pdf-' + num;

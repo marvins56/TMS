@@ -62,11 +62,32 @@ namespace TMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UnitAdminid,Userid,UnitId")] UnitAdminTable unitAdminTable)
         {
+            var vname = db.UnitAdminTables.Where(a => a.Userid == (unitAdminTable.Userid)).FirstOrDefault();
+
+
             if (ModelState.IsValid)
             {
-                db.UnitAdminTables.Add(unitAdminTable);
-                db.SaveChanges();
+                if (vname != null)
+                {
+                    TempData["unitsexixts"] = "USER ALREADY HAS AN ASSIGNED  UNIT ";
+                }
+               
+                else
+                {
+                    try
+                    {
+                        db.UnitAdminTables.Add(unitAdminTable);
+                        db.SaveChanges();
+
+                    }
+                    catch (Exception e)
+                    {
+                        TempData["savinguniterrorsunit"] = e.Message;
+                    }
+                }
+
                 return RedirectToAction("Index");
+
             }
 
             ViewBag.UnitId = new SelectList(db.UnitTables, "UnitId", "UnitName", unitAdminTable.UnitId);

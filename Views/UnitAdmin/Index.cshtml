@@ -5,80 +5,97 @@
 }
 @if (Session["urserrole"].Equals(2) || Session["urserrole"].Equals(5))
 {
+    if (TempData["unitsexixts"] != null || TempData["savinguniterrorsunit"] != null)
+    {
+        <div class="card text-center  mt-100">
+            <div class="card-header bg-danger text-white">Notification</div>
+            <div class="card-body">
+                <h5 class="card-title">NOT AUTHORISED</h5>
 
-    <div class="row">
-        <div class="col-md-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-title">
-                        All User Units
+                <h6 class="card-text text-uppercase"> @TempData["unitsexixts"]  </h6>
+                <h6 class="card-text text-uppercase"> @TempData["savinguniterrorsunit"] </h6>
 
-                        <a href="@Url.Action("Create", "UnitAdmin")" class="btn btn-social-icon btn-outline-primary float-right">
-                            <i class="fa-solid fa-plus fa-4x pt-3"></i>
-                        </a>
-                    </p>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="table-responsive">
-                                <table class="display expandable-table" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.UsersTable.Username)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.UnitTable.UnitName)
-                                            </th>
-                                            
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
+
+            </div>
+            <div class="card-footer text-muted"> <a href="@Url.Action("Index", "UnitAdmin")" class="btn btn-outline-primary text-black"> <i class="fa-solid fa-house-circle-check"></i></a></div>
+        </div> }
+    else
+    {
+        <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title">
+                            All User Units
+
+                            <a href="@Url.Action("Create", "UnitAdmin")" class="btn btn-social-icon btn-outline-primary float-right">
+                                <i class="fa-solid fa-plus fa-4x pt-3"></i>
+                            </a>
+                        </p>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="display expandable-table" style="width:100%">
+                                        <thead>
                                             <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.UsersTable.Username)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.UnitTable.UnitName)
-                                                </td>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.UsersTable.Username)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.UnitTable.UnitName)
+                                                </th>
 
-                                                <td>
-
-                                                    <a href="@Url.Action("Edit", "UnitAdmin", new { id = item.UnitAdminid  })" class="btn btn-inverse-primary">
-                                                        <i class="fa-solid fa-pen-to-square menu-icon"></i>
-
-                                                    </a>
-
-                                                    <a href="@Url.Action("Details", "UnitAdmin",new { id = item.UnitAdminid })" class="btn btn-inverse-success">
-                                                        <i class="fa-solid fa-eye   "></i>
-
-                                                    </a>
-
-                                                    <a href="@Url.Action("Delete", "UnitAdmin", new { id = item.UnitAdminid  })" class="btn btn-inverse-danger">
-                                                        DEACTIVATE
-
-                                                    </a>
-
-
-
-                                                </td>
-
+                                                <th></th>
                                             </tr>
-                                        }
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.UsersTable.Username)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.UnitTable.UnitName)
+                                                    </td>
 
-                                    </tbody>
-                                </table>
+                                                    <td>
+
+                                                        <a href="@Url.Action("Edit", "UnitAdmin", new { id = item.UnitAdminid  })" class="btn btn-inverse-primary">
+                                                            <i class="fa-solid fa-pen-to-square menu-icon"></i>
+
+                                                        </a>
+
+                                                        <a href="@Url.Action("Details", "UnitAdmin",new { id = item.UnitAdminid })" class="btn btn-inverse-success">
+                                                            <i class="fa-solid fa-eye   "></i>
+
+                                                        </a>
+
+                                                        <a href="@Url.Action("Delete", "UnitAdmin", new { id = item.UnitAdminid  })" class="btn btn-inverse-danger">
+                                                            DEACTIVATE
+
+                                                        </a>
+
+
+
+                                                    </td>
+
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
-
-
         </div>
-    </div>
+    }
+
 
 }
 else

@@ -57,35 +57,38 @@ namespace TMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    db.TaskTables.Add(taskTable);
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    TempData["savingerror"] = e.Message;
-                }
+               
+                    try
+                    {
+                        db.TaskTables.Add(taskTable);
+                        db.SaveChanges();
 
+                        // admin sending notification to email
+                        int id_user = Convert.ToInt32(taskTable.UserId);
 
-                // admin sending notification to email
-                int id_user = Convert.ToInt32(taskTable.UserId);
+                        UsersTable userdetails = db.UsersTables.Find(id_user);
+                        //sending email for task 
+                        if (userdetails == null)
+                        {
+                            TempData["sessiondataaccess"] = "error fetching data";
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            SendTaskEmail(userdetails.Email, userdetails.Username, taskTable.TastStartTime, taskTable.TaskEndTime, taskTable.BodyContent);
+                            TempData["emailstatus"] = "USER " + userdetails.Username + " with " + userdetails.Email + " has been notified";
+                            return RedirectToAction("Index");
+                        }
 
+                    }
+                    catch (Exception e)
+                    {
+                        TempData["savingerror"] = e.Message;
+                    }
                 
-                UsersTable userdetails = db.UsersTables.Find(id_user);
-                //sending email for task 
-                if (userdetails == null)
-                {
-                    TempData["sessiondataaccess"] = "error fetching data";
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    SendTaskEmail(userdetails.Email, userdetails.Username, taskTable.TastStartTime, taskTable.TaskEndTime, taskTable.BodyContent);
-                    TempData["emailstatus"] = "USER " + userdetails.Username + " with " + userdetails.Email + " has been notified";
-                    return RedirectToAction("Index");
-                }
-  
+              
+
+
             }
 
             ViewBag.UnitId = new SelectList(db.UnitTables, "UnitId", "UnitName", taskTable.UnitId);

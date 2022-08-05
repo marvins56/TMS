@@ -12,9 +12,11 @@
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="~/App_Start/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="~/App_Start/vendors/ti-icons/css/themify-icons.css">
+
     <link rel="stylesheet" type="text/css" href="~/App_Start/js/select.dataTables.min.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     @Scripts.Render("~/bundles/jquery")
+
 
     <script src="https://cdn.logwork.com/widget/countdown.js"></script>
     <!-- End plugin css for this page -->
@@ -24,9 +26,11 @@
     <link rel="shortcut icon" href="~/App_Start/images/police.svg" />
     <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/Content/loader.css" rel="stylesheet">
 </head>
 <body>
 
+    <div id="loader"> </div>
     @if (Request.IsAuthenticated && Session["userId"] != null)
     {
 
@@ -63,46 +67,46 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                                 <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                              
+
                                 @*<a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-success">
-                                            <i class="ti-info-alt mx-0"></i>
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-success">
+                                                <i class="ti-info-alt mx-0"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="preview-item-content">
-                                        <h6 class="preview-subject font-weight-normal">Application Error</h6>
-                                        <p class="font-weight-light small-text mb-0 text-muted">
-                                            Just now
-                                        </p>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-warning">
-                                            <i class="ti-settings mx-0"></i>
+                                        <div class="preview-item-content">
+                                            <h6 class="preview-subject font-weight-normal">Application Error</h6>
+                                            <p class="font-weight-light small-text mb-0 text-muted">
+                                                Just now
+                                            </p>
                                         </div>
-                                    </div>
-                                    <div class="preview-item-content">
-                                        <h6 class="preview-subject font-weight-normal">Settings</h6>
-                                        <p class="font-weight-light small-text mb-0 text-muted">
-                                            Private message
-                                        </p>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-info">
-                                            <i class="ti-user mx-0"></i>
+                                    </a>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-warning">
+                                                <i class="ti-settings mx-0"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="preview-item-content">
-                                        <h6 class="preview-subject font-weight-normal">New user registration</h6>
-                                        <p class="font-weight-light small-text mb-0 text-muted">
-                                            2 days ago
-                                        </p>
-                                    </div>
-                                </a>*@
+                                        <div class="preview-item-content">
+                                            <h6 class="preview-subject font-weight-normal">Settings</h6>
+                                            <p class="font-weight-light small-text mb-0 text-muted">
+                                                Private message
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-info">
+                                                <i class="ti-user mx-0"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <h6 class="preview-subject font-weight-normal">New user registration</h6>
+                                            <p class="font-weight-light small-text mb-0 text-muted">
+                                                2 days ago
+                                            </p>
+                                        </div>
+                                    </a>*@
                             </div>
                         </li>
 
@@ -124,7 +128,7 @@
                                     <div class="preview-item-content">
                                         <h6 class="preview-subject font-weight-normal">@HttpContext.Current.User.Identity.Name</h6>
                                         <p class="font-weight-light small-text mb-0 text-muted">
-                                           View Email for notifications
+                                            View Email for notifications
                                         </p>
                                     </div>
                                 </a>
@@ -193,7 +197,7 @@
                         </div>
                     </div>
                 </div>
-                                
+
                 <!-- partial:partials/_sidebar.html -->
                 <nav class="sidebar sidebar-offcanvas" id="sidebar">
                     <ul class="nav">
@@ -433,11 +437,11 @@
                     </ul>
                 </nav>
 
-
-
                 <!-- partial -->
                 <div class="main-panel">
                     <div class="content-wrapper">
+
+
                         @RenderBody()
 
 
@@ -458,6 +462,7 @@
         </div>
         <!-- container-scroller -->
         <!-- plugins:js -->
+
         <script src="~/App_Start/vendors/js/vendor.bundle.base.js"></script>
         <!-- endinject -->
         <!-- Plugin js for this page -->
@@ -478,8 +483,9 @@
         <script src="~/App_Start/js/dashboard.js"></script>
         <script src="~/App_Start/js/Chart.roundedBarCharts.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
         <!-- End custom js for this page-->
-        @Scripts.Render("~/bundles/jquery")
+
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
 
@@ -503,7 +509,20 @@
             </div>
         </div>
     }
+    <script>
+        var showLoader = function (text) {
+            $('#resultLoading').show();
+            $('#resultLoading').find('.loader-text').html(text);
+        };
 
+        jQuery(document).ready(function () {
+            jQuery(window).on("beforeunload ", function () {
+                showLoader('Loading, please wait...');
+            });
+        });
+
+        $("#loader").fadeOut(1000);
+    </script>
 </body>
 </html>
 

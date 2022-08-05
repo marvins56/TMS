@@ -4,39 +4,47 @@
     ViewBag.Title = "Details";
 }
 
-
+<div id="resultLoading" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 10000; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;">
+    <div style="width: 340px; height: 200px; text-align: center; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; z-index: 10; color: rgb(255, 255, 255);">
+        <div class="uil-default-css">
+            <div class="loader">Loading...</div>
+        </div>
+        <div class="resultLoading" style="display: block; font-size: 18px; font-weight: 300;">&nbsp;</div>
+    </div>
+    <div style="background: rgb(0, 0, 0); opacity: 0.6; width: 100%; height: 100%; position: absolute; top: 0px;"></div>
+</div>
 <div class="jumbotron">
 
 
     <div class="card text-center">
         <div class="card-header">
-           PERSONALTOTOLIST  DETAILS
+            PERSONALTOTOLIST  DETAILS
         </div>
         <div class="card-body">
-           
+
             <div class=" table-responsive">
-         
+
                 <hr />
-             
-                    <table class="table table-striped display expandable-table" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th scope="col"> @Html.DisplayNameFor(model => model.UserName)</th>
-                                <th scope="col">   @Html.DisplayNameFor(model => model.TaskName)</th>
-                                <th scope="col">@Html.DisplayNameFor(model => model.TaskFeedback)</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row"> @Html.DisplayFor(model => model.UserName)</th>
-                                <td> @Html.DisplayFor(model => model.TaskName)</td>
-                                <td> @Html.DisplayFor(model => model.TaskFeedback)</td>
-                              
-                            </tr>
-                            
-                        </tbody>
-                    </table>
+
+                <table class="table table-striped display expandable-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col"> @Html.DisplayNameFor(model => model.UserName)</th>
+                            <th scope="col">   @Html.DisplayNameFor(model => model.TaskName)</th>
+                            <th scope="col">@Html.DisplayNameFor(model => model.TaskFeedback)</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"> @Html.DisplayFor(model => model.UserName)</th>
+                            <td> @Html.DisplayFor(model => model.TaskName)</td>
+                            <td> @Html.DisplayFor(model => model.TaskFeedback)</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
 
             </div>
             <div style="margin-top:10px;">
@@ -52,11 +60,11 @@
 
         </div>
         <div class="card-footer text-muted">
-           DETAILS
+            DETAILS
         </div>
     </div>
 
 
-   
+
 
 </div>

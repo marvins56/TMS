@@ -9,7 +9,15 @@
         overflow: auto;
     }
 </style>
-
+<div id="resultLoading" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 10000; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;">
+    <div style="width: 340px; height: 200px; text-align: center; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; z-index: 10; color: rgb(255, 255, 255);">
+        <div class="uil-default-css">
+            <div class="loader">Loading...</div>
+        </div>
+        <div class="resultLoading" style="display: block; font-size: 18px; font-weight: 300;">&nbsp;</div>
+    </div>
+    <div style="background: rgb(0, 0, 0); opacity: 0.6; width: 100%; height: 100%; position: absolute; top: 0px;"></div>
+</div>
 <div class="row">
     <div class="col-12">
         <input type="button" id="btnPreview" value="PREVIEW USER MANUAL" onclick="LoadPdfFromUrl('@Url.Content("~/App_Start/images/report_documents/Usermanual.pdf")')" class="btn d-block btn-outline-primary" />
@@ -17,56 +25,56 @@
         <div id="pdf_container"></div>
     </div>
 </div>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf_viewer.min.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript">
-            var pdfjsLib = window['pdfjs-dist/build/pdf'];
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js';
-            var pdfDoc = null;
-            var scale = 1; //Set Scale for zooming PDF.
-            var resolution = 1; //Set Resolution to Adjust PDF clarity.
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf_viewer.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    var pdfjsLib = window['pdfjs-dist/build/pdf'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js';
+    var pdfDoc = null;
+    var scale = 1; //Set Scale for zooming PDF.
+    var resolution = 1; //Set Resolution to Adjust PDF clarity.
 
-            function LoadPdfFromUrl(url) {
-                //Read PDF from URL.
-                pdfjsLib.getDocument(url).promise.then(function (pdfDoc_) {
-                    pdfDoc = pdfDoc_;
+    function LoadPdfFromUrl(url) {
+        //Read PDF from URL.
+        pdfjsLib.getDocument(url).promise.then(function (pdfDoc_) {
+            pdfDoc = pdfDoc_;
 
-                    //Reference the Container DIV.
-                    var pdf_container = document.getElementById("pdf_container");
-                    pdf_container.style.display = "block";
+            //Reference the Container DIV.
+            var pdf_container = document.getElementById("pdf_container");
+            pdf_container.style.display = "block";
 
-                    //Loop and render all pages.
-                    for (var i = 1; i <= pdfDoc.numPages; i++) {
-                        RenderPage(pdf_container, i);
-                    }
-                });
+            //Loop and render all pages.
+            for (var i = 1; i <= pdfDoc.numPages; i++) {
+                RenderPage(pdf_container, i);
+            }
+        });
+    };
+    function RenderPage(pdf_container, num) {
+        pdfDoc.getPage(num).then(function (page) {
+            //Create Canvas element and append to the Container DIV.
+            var canvas = document.createElement('canvas');
+            canvas.id = 'pdf-' + num;
+            ctx = canvas.getContext('2d');
+            pdf_container.appendChild(canvas);
+
+            //Create and add empty DIV to add SPACE between pages.
+            var spacer = document.createElement("div");
+            spacer.style.height = "20px";
+            pdf_container.appendChild(spacer);
+
+            //Set the Canvas dimensions using ViewPort and Scale.
+            var viewport = page.getViewport({ scale: scale });
+            canvas.height = resolution * viewport.height;
+            canvas.width = resolution * viewport.width;
+
+            //Render the PDF page.
+            var renderContext = {
+                canvasContext: ctx,
+                viewport: viewport,
+                transform: [resolution, 0, 0, resolution, 0, 0]
             };
-            function RenderPage(pdf_container, num) {
-                pdfDoc.getPage(num).then(function (page) { 
-                    //Create Canvas element and append to the Container DIV.
-                    var canvas = document.createElement('canvas');
-                    canvas.id = 'pdf-' + num;
-                    ctx = canvas.getContext('2d');
-                    pdf_container.appendChild(canvas);
 
-                    //Create and add empty DIV to add SPACE between pages.
-                    var spacer = document.createElement("div");
-                    spacer.style.height = "20px";
-                    pdf_container.appendChild(spacer);
-
-                    //Set the Canvas dimensions using ViewPort and Scale.
-                    var viewport = page.getViewport({ scale: scale });
-                    canvas.height = resolution * viewport.height;
-                    canvas.width = resolution * viewport.width;
-
-                    //Render the PDF page.
-                    var renderContext = {
-                        canvasContext: ctx,
-                        viewport: viewport,
-                        transform: [resolution, 0, 0, resolution, 0, 0]
-                    };
-
-                    page.render(renderContext);
-                });
-            };
-        </script>
+            page.render(renderContext);
+        });
+    };
+</script>

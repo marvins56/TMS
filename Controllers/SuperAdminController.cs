@@ -13,7 +13,7 @@ namespace TMS.Controllers
 {
     public class SuperAdminController : Controller
     {
-        private TMSEntities1 db = new TMSEntities1();
+        private TMS_db1Entities db = new TMS_db1Entities();
 
         // GET: SuperAdmin
         public ActionResult Index()
@@ -172,7 +172,7 @@ namespace TMS.Controllers
                             #endregion
                             users.IsEmailVerified = false;
                             #region savr to db
-                            using (db = new TMSEntities1())
+                            using (db = new TMS_db1Entities())
                             {
                                 db.UsersTables.Add(users);
 
@@ -276,7 +276,7 @@ namespace TMS.Controllers
         [NonAction]
         public bool IsMailExists(string emailId)
         {
-            using (db = new TMSEntities1())
+            using (db = new TMS_db1Entities())
             {
                 var v = db.UsersTables.Where(a => a.Email == emailId).FirstOrDefault();
                 return v != null;
@@ -285,7 +285,7 @@ namespace TMS.Controllers
         [NonAction]
         public bool IsuSernameExits(string username)
         {
-            using (db = new TMSEntities1())
+            using (db = new TMS_db1Entities())
             {
                 var v = db.UsersTables.Where(a => a.Username == username).FirstOrDefault();
                 return v != null;

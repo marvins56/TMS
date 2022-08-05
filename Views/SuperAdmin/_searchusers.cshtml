@@ -1,72 +1,79 @@
 ﻿
 @model IEnumerable<TMS.Models.UsersTable>
+<div id="resultLoading" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 10000; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;">
+    <div style="width: 340px; height: 200px; text-align: center; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; z-index: 10; color: rgb(255, 255, 255);">
+        <div class="uil-default-css">
+            <div class="loader">Loading...</div>
+        </div>
+        <div class="resultLoading" style="display: block; font-size: 18px; font-weight: 300;">&nbsp;</div>
+    </div>
+    <div style="background: rgb(0, 0, 0); opacity: 0.6; width: 100%; height: 100%; position: absolute; top: 0px;"></div>
+</div>
+<table class="display expandable-table" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DOB)
+            </th>
 
-                                <table class="display expandable-table" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Username)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Email)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.DOB)
-                                            </th>
-                                       
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.IsEmailVerified)
-                                            </th>
-                                          
+            <th>
+                @Html.DisplayNameFor(model => model.IsEmailVerified)
+            </th>
 
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if (Model.Count() != 0)
-                                        {
-                                            foreach (var item in Model)
-                                            {
-                                                <tr>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Username)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Email)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.DOB)
-                                                    </td>
 
-                                                    <td>
-                                                        @if (item.IsEmailVerified == true)
-                                                        {
-                                                            <button class=" btn badge-success">  Verified</button>
-                                                        }
-                                                        else
-                                                        {
-                                                            <button class="btn badge-warning text-white">  Pending verification </button>
-                                                        }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() != 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DOB)
+                    </td>
 
-                                                    </td>                           
-                                                    <td>
-                                                        <a href="@Url.Action("Details", "Users", new { id = item.Userid })" class="btn btn-inverse-success">
-                                                            <i class="fa-solid fa-eye "></i>
+                    <td>
+                        @if (item.IsEmailVerified == true)
+                        {
+                            <button class=" btn badge-success">  Verified</button>
+                        }
+                        else
+                        {
+                            <button class="btn badge-warning text-white">  Pending verification </button>
+                        }
 
-                                                        </a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Details", "Users", new { id = item.Userid })" class="btn btn-inverse-success">
+                            <i class="fa-solid fa-eye "></i>
 
-                                                        <a href="@Url.Action("Userperformance", "Users", new { sessionid = item.Userid })" class="btn btn-inverse-primary">
-                                                            <i class="fa-solid fa-chart-pie"></i>
+                        </a>
 
-                                                        </a>
+                        <a href="@Url.Action("Userperformance", "Users", new { sessionid = item.Userid })" class="btn btn-inverse-primary">
+                            <i class="fa-solid fa-chart-pie"></i>
 
-                                                    </td>
-                                                </tr>
-                                            }
-                }
-                else
-                {
-                                   <button class="btn btn-outline-danger text-white">  NO RESULTS FOUND </button>
-                }
+                        </a>
 
- 
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <button class="btn btn-outline-danger text-white">  NO RESULTS FOUND </button>
+        }
+

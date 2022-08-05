@@ -1,0 +1,714 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TMS_db1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GeneralToDoListTable">
+          <Key>
+            <PropertyRef Name="ToDoId" />
+          </Key>
+          <Property Name="ToDoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="int" Nullable="false" />
+          <Property Name="TaskName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TaskFeedBack" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+          <Property Name="IsTaskComplete" Type="bit" Nullable="false" />
+          <Property Name="UnitId" Type="int" Nullable="false" />
+          <Property Name="CompletionDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonalToDoListTable">
+          <Key>
+            <PropertyRef Name="PToDoListId" />
+          </Key>
+          <Property Name="PToDoListId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TaskName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TaskFeedback" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RolesTable">
+          <Key>
+            <PropertyRef Name="RolesId" />
+          </Key>
+          <Property Name="RolesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskTable">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="TaskName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FeedBack" Type="nvarchar" MaxLength="100" />
+          <Property Name="BodyContent" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TaskStatus" Type="bit" Nullable="false" />
+          <Property Name="TastStartTime" Type="datetime" Nullable="false" />
+          <Property Name="TaskEndTime" Type="datetime" Nullable="false" />
+          <Property Name="UnitId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnitAdminTable">
+          <Key>
+            <PropertyRef Name="UnitAdminid" />
+          </Key>
+          <Property Name="UnitAdminid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Userid" Type="int" Nullable="false" />
+          <Property Name="UnitId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnitTable">
+          <Key>
+            <PropertyRef Name="UnitId" />
+          </Key>
+          <Property Name="UnitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UnitName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserReportsTable">
+          <Key>
+            <PropertyRef Name="Reportid" />
+          </Key>
+          <Property Name="Reportid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Userid" Type="int" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+          <Property Name="Report" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsersRolesTable">
+          <Key>
+            <PropertyRef Name="UsersRolesID" />
+          </Key>
+          <Property Name="UsersRolesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Userid" Type="int" Nullable="false" />
+          <Property Name="RolesId" Type="int" />
+        </EntityType>
+        <EntityType Name="UsersTable">
+          <Key>
+            <PropertyRef Name="Userid" />
+          </Key>
+          <Property Name="Userid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar(max)" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
+          <Property Name="ActivationCode" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ResetPasswordCode" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="fk_adminunitroles">
+          <End Role="UnitTable" Type="Self.UnitTable" Multiplicity="1" />
+          <End Role="UnitAdminTable" Type="Self.UnitAdminTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTable">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="UnitAdminTable">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TaskId_tasks">
+          <End Role="TaskTable" Type="Self.TaskTable" Multiplicity="1" />
+          <End Role="GeneralToDoListTable" Type="Self.GeneralToDoListTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskTable">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="GeneralToDoListTable">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_unitdetails">
+          <End Role="UnitTable" Type="Self.UnitTable" Multiplicity="1" />
+          <End Role="GeneralToDoListTable" Type="Self.GeneralToDoListTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTable">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="GeneralToDoListTable">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UnitId">
+          <End Role="UnitTable" Type="Self.UnitTable" Multiplicity="1" />
+          <End Role="TaskTable" Type="Self.TaskTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTable">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="TaskTable">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_useradminroleunit">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="1" />
+          <End Role="UnitAdminTable" Type="Self.UnitAdminTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Userid" />
+            </Principal>
+            <Dependent Role="UnitAdminTable">
+              <PropertyRef Name="Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserIdz">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="1" />
+          <End Role="TaskTable" Type="Self.TaskTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Userid" />
+            </Principal>
+            <Dependent Role="TaskTable">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usersdetails">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="1" />
+          <End Role="GeneralToDoListTable" Type="Self.GeneralToDoListTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Userid" />
+            </Principal>
+            <Dependent Role="GeneralToDoListTable">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Usersreports">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="1" />
+          <End Role="UserReportsTable" Type="Self.UserReportsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Userid" />
+            </Principal>
+            <Dependent Role="UserReportsTable">
+              <PropertyRef Name="Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Usersreportstasks">
+          <End Role="TaskTable" Type="Self.TaskTable" Multiplicity="1" />
+          <End Role="UserReportsTable" Type="Self.UserReportsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskTable">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="UserReportsTable">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UsersRolesidz">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="1" />
+          <End Role="UsersRolesTable" Type="Self.UsersRolesTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Userid" />
+            </Principal>
+            <Dependent Role="UsersRolesTable">
+              <PropertyRef Name="Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UsersRolesidzwz">
+          <End Role="RolesTable" Type="Self.RolesTable" Multiplicity="0..1" />
+          <End Role="UsersRolesTable" Type="Self.UsersRolesTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolesTable">
+              <PropertyRef Name="RolesId" />
+            </Principal>
+            <Dependent Role="UsersRolesTable">
+              <PropertyRef Name="RolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TMS_db1ModelStoreContainer">
+          <EntitySet Name="GeneralToDoListTable" EntityType="Self.GeneralToDoListTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonalToDoListTable" EntityType="Self.PersonalToDoListTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolesTable" EntityType="Self.RolesTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskTable" EntityType="Self.TaskTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitAdminTable" EntityType="Self.UnitAdminTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitTable" EntityType="Self.UnitTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserReportsTable" EntityType="Self.UserReportsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersRolesTable" EntityType="Self.UsersRolesTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersTable" EntityType="Self.UsersTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_adminunitroles" Association="Self.fk_adminunitroles">
+            <End Role="UnitTable" EntitySet="UnitTable" />
+            <End Role="UnitAdminTable" EntitySet="UnitAdminTable" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TaskId_tasks" Association="Self.fk_TaskId_tasks">
+            <End Role="TaskTable" EntitySet="TaskTable" />
+            <End Role="GeneralToDoListTable" EntitySet="GeneralToDoListTable" />
+          </AssociationSet>
+          <AssociationSet Name="fk_unitdetails" Association="Self.fk_unitdetails">
+            <End Role="UnitTable" EntitySet="UnitTable" />
+            <End Role="GeneralToDoListTable" EntitySet="GeneralToDoListTable" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UnitId" Association="Self.fk_UnitId">
+            <End Role="UnitTable" EntitySet="UnitTable" />
+            <End Role="TaskTable" EntitySet="TaskTable" />
+          </AssociationSet>
+          <AssociationSet Name="fk_useradminroleunit" Association="Self.fk_useradminroleunit">
+            <End Role="UsersTable" EntitySet="UsersTable" />
+            <End Role="UnitAdminTable" EntitySet="UnitAdminTable" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserIdz" Association="Self.fk_UserIdz">
+            <End Role="UsersTable" EntitySet="UsersTable" />
+            <End Role="TaskTable" EntitySet="TaskTable" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usersdetails" Association="Self.fk_usersdetails">
+            <End Role="UsersTable" EntitySet="UsersTable" />
+            <End Role="GeneralToDoListTable" EntitySet="GeneralToDoListTable" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Usersreports" Association="Self.fk_Usersreports">
+            <End Role="UsersTable" EntitySet="UsersTable" />
+            <End Role="UserReportsTable" EntitySet="UserReportsTable" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Usersreportstasks" Association="Self.fk_Usersreportstasks">
+            <End Role="TaskTable" EntitySet="TaskTable" />
+            <End Role="UserReportsTable" EntitySet="UserReportsTable" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UsersRolesidz" Association="Self.fk_UsersRolesidz">
+            <End Role="UsersTable" EntitySet="UsersTable" />
+            <End Role="UsersRolesTable" EntitySet="UsersRolesTable" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UsersRolesidzwz" Association="Self.fk_UsersRolesidzwz">
+            <End Role="RolesTable" EntitySet="RolesTable" />
+            <End Role="UsersRolesTable" EntitySet="UsersRolesTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TMS_db1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="GeneralToDoListTable">
+          <Key>
+            <PropertyRef Name="ToDoId" />
+          </Key>
+          <Property Name="ToDoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="Int32" Nullable="false" />
+          <Property Name="TaskName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TaskFeedBack" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <Property Name="IsTaskComplete" Type="Boolean" Nullable="false" />
+          <Property Name="UnitId" Type="Int32" Nullable="false" />
+          <Property Name="CompletionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TaskTable" Relationship="Self.fk_TaskId_tasks" FromRole="GeneralToDoListTable" ToRole="TaskTable" />
+          <NavigationProperty Name="UnitTable" Relationship="Self.fk_unitdetails" FromRole="GeneralToDoListTable" ToRole="UnitTable" />
+          <NavigationProperty Name="UsersTable" Relationship="Self.fk_usersdetails" FromRole="GeneralToDoListTable" ToRole="UsersTable" />
+        </EntityType>
+        <EntityType Name="PersonalToDoListTable">
+          <Key>
+            <PropertyRef Name="PToDoListId" />
+          </Key>
+          <Property Name="PToDoListId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TaskName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TaskFeedback" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RolesTable">
+          <Key>
+            <PropertyRef Name="RolesId" />
+          </Key>
+          <Property Name="RolesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UsersRolesTables" Relationship="Self.fk_UsersRolesidzwz" FromRole="RolesTable" ToRole="UsersRolesTable" />
+        </EntityType>
+        <EntityType Name="TaskTable">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="TaskName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FeedBack" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BodyContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TaskStatus" Type="Boolean" Nullable="false" />
+          <Property Name="TastStartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TaskEndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UnitId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GeneralToDoListTables" Relationship="Self.fk_TaskId_tasks" FromRole="TaskTable" ToRole="GeneralToDoListTable" />
+          <NavigationProperty Name="UnitTable" Relationship="Self.fk_UnitId" FromRole="TaskTable" ToRole="UnitTable" />
+          <NavigationProperty Name="UsersTable" Relationship="Self.fk_UserIdz" FromRole="TaskTable" ToRole="UsersTable" />
+          <NavigationProperty Name="UserReportsTables" Relationship="Self.fk_Usersreportstasks" FromRole="TaskTable" ToRole="UserReportsTable" />
+        </EntityType>
+        <EntityType Name="UnitAdminTable">
+          <Key>
+            <PropertyRef Name="UnitAdminid" />
+          </Key>
+          <Property Name="UnitAdminid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Userid" Type="Int32" Nullable="false" />
+          <Property Name="UnitId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UnitTable" Relationship="Self.fk_adminunitroles" FromRole="UnitAdminTable" ToRole="UnitTable" />
+          <NavigationProperty Name="UsersTable" Relationship="Self.fk_useradminroleunit" FromRole="UnitAdminTable" ToRole="UsersTable" />
+        </EntityType>
+        <EntityType Name="UnitTable">
+          <Key>
+            <PropertyRef Name="UnitId" />
+          </Key>
+          <Property Name="UnitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UnitName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GeneralToDoListTables" Relationship="Self.fk_unitdetails" FromRole="UnitTable" ToRole="GeneralToDoListTable" />
+          <NavigationProperty Name="TaskTables" Relationship="Self.fk_UnitId" FromRole="UnitTable" ToRole="TaskTable" />
+          <NavigationProperty Name="UnitAdminTables" Relationship="Self.fk_adminunitroles" FromRole="UnitTable" ToRole="UnitAdminTable" />
+        </EntityType>
+        <EntityType Name="UserReportsTable">
+          <Key>
+            <PropertyRef Name="Reportid" />
+          </Key>
+          <Property Name="Reportid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Userid" Type="Int32" Nullable="false" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <Property Name="Report" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TaskTable" Relationship="Self.fk_Usersreportstasks" FromRole="UserReportsTable" ToRole="TaskTable" />
+          <NavigationProperty Name="UsersTable" Relationship="Self.fk_Usersreports" FromRole="UserReportsTable" ToRole="UsersTable" />
+        </EntityType>
+        <EntityType Name="UsersRolesTable">
+          <Key>
+            <PropertyRef Name="UsersRolesID" />
+          </Key>
+          <Property Name="UsersRolesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Userid" Type="Int32" Nullable="false" />
+          <Property Name="RolesId" Type="Int32" />
+          <NavigationProperty Name="RolesTable" Relationship="Self.fk_UsersRolesidzwz" FromRole="UsersRolesTable" ToRole="RolesTable" />
+          <NavigationProperty Name="UsersTable" Relationship="Self.fk_UsersRolesidz" FromRole="UsersRolesTable" ToRole="UsersTable" />
+        </EntityType>
+        <EntityType Name="UsersTable">
+          <Key>
+            <PropertyRef Name="Userid" />
+          </Key>
+          <Property Name="Userid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
+          <Property Name="ActivationCode" Type="Guid" Nullable="false" />
+          <Property Name="ResetPasswordCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GeneralToDoListTables" Relationship="Self.fk_usersdetails" FromRole="UsersTable" ToRole="GeneralToDoListTable" />
+          <NavigationProperty Name="TaskTables" Relationship="Self.fk_UserIdz" FromRole="UsersTable" ToRole="TaskTable" />
+          <NavigationProperty Name="UnitAdminTables" Relationship="Self.fk_useradminroleunit" FromRole="UsersTable" ToRole="UnitAdminTable" />
+          <NavigationProperty Name="UserReportsTables" Relationship="Self.fk_Usersreports" FromRole="UsersTable" ToRole="UserReportsTable" />
+          <NavigationProperty Name="UsersRolesTables" Relationship="Self.fk_UsersRolesidz" FromRole="UsersTable" ToRole="UsersRolesTable" />
+        </EntityType>
+        <Association Name="fk_TaskId_tasks">
+          <End Role="TaskTable" Type="Self.TaskTable" Multiplicity="1" />
+          <End Role="GeneralToDoListTable" Type="Self.GeneralToDoListTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskTable">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="GeneralToDoListTable">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_unitdetails">
+          <End Role="UnitTable" Type="Self.UnitTable" Multiplicity="1" />
+          <End Role="GeneralToDoListTable" Type="Self.GeneralToDoListTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTable">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="GeneralToDoListTable">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usersdetails">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="1" />
+          <End Role="GeneralToDoListTable" Type="Self.GeneralToDoListTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Userid" />
+            </Principal>
+            <Dependent Role="GeneralToDoListTable">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UsersRolesidzwz">
+          <End Role="RolesTable" Type="Self.RolesTable" Multiplicity="0..1" />
+          <End Role="UsersRolesTable" Type="Self.UsersRolesTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolesTable">
+              <PropertyRef Name="RolesId" />
+            </Principal>
+            <Dependent Role="UsersRolesTable">
+              <PropertyRef Name="RolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UnitId">
+          <End Role="UnitTable" Type="Self.UnitTable" Multiplicity="1" />
+          <End Role="TaskTable" Type="Self.TaskTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTable">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="TaskTable">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserIdz">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="1" />
+          <End Role="TaskTable" Type="Self.TaskTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Userid" />
+            </Principal>
+            <Dependent Role="TaskTable">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Usersreportstasks">
+          <End Role="TaskTable" Type="Self.TaskTable" Multiplicity="1" />
+          <End Role="UserReportsTable" Type="Self.UserReportsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskTable">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="UserReportsTable">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_adminunitroles">
+          <End Role="UnitTable" Type="Self.UnitTable" Multiplicity="1" />
+          <End Role="UnitAdminTable" Type="Self.UnitAdminTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitTable">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="UnitAdminTable">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_useradminroleunit">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="1" />
+          <End Role="UnitAdminTable" Type="Self.UnitAdminTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Userid" />
+            </Principal>
+            <Dependent Role="UnitAdminTable">
+              <PropertyRef Name="Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Usersreports">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="1" />
+          <End Role="UserReportsTable" Type="Self.UserReportsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Userid" />
+            </Principal>
+            <Dependent Role="UserReportsTable">
+              <PropertyRef Name="Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UsersRolesidz">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="1" />
+          <End Role="UsersRolesTable" Type="Self.UsersRolesTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Userid" />
+            </Principal>
+            <Dependent Role="UsersRolesTable">
+              <PropertyRef Name="Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TMS_db1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GeneralToDoListTables" EntityType="Self.GeneralToDoListTable" />
+          <EntitySet Name="PersonalToDoListTables" EntityType="Self.PersonalToDoListTable" />
+          <EntitySet Name="RolesTables" EntityType="Self.RolesTable" />
+          <EntitySet Name="TaskTables" EntityType="Self.TaskTable" />
+          <EntitySet Name="UnitAdminTables" EntityType="Self.UnitAdminTable" />
+          <EntitySet Name="UnitTables" EntityType="Self.UnitTable" />
+          <EntitySet Name="UserReportsTables" EntityType="Self.UserReportsTable" />
+          <EntitySet Name="UsersRolesTables" EntityType="Self.UsersRolesTable" />
+          <EntitySet Name="UsersTables" EntityType="Self.UsersTable" />
+          <AssociationSet Name="fk_TaskId_tasks" Association="Self.fk_TaskId_tasks">
+            <End Role="TaskTable" EntitySet="TaskTables" />
+            <End Role="GeneralToDoListTable" EntitySet="GeneralToDoListTables" />
+          </AssociationSet>
+          <AssociationSet Name="fk_unitdetails" Association="Self.fk_unitdetails">
+            <End Role="UnitTable" EntitySet="UnitTables" />
+            <End Role="GeneralToDoListTable" EntitySet="GeneralToDoListTables" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usersdetails" Association="Self.fk_usersdetails">
+            <End Role="UsersTable" EntitySet="UsersTables" />
+            <End Role="GeneralToDoListTable" EntitySet="GeneralToDoListTables" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UsersRolesidzwz" Association="Self.fk_UsersRolesidzwz">
+            <End Role="RolesTable" EntitySet="RolesTables" />
+            <End Role="UsersRolesTable" EntitySet="UsersRolesTables" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UnitId" Association="Self.fk_UnitId">
+            <End Role="UnitTable" EntitySet="UnitTables" />
+            <End Role="TaskTable" EntitySet="TaskTables" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserIdz" Association="Self.fk_UserIdz">
+            <End Role="UsersTable" EntitySet="UsersTables" />
+            <End Role="TaskTable" EntitySet="TaskTables" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Usersreportstasks" Association="Self.fk_Usersreportstasks">
+            <End Role="TaskTable" EntitySet="TaskTables" />
+            <End Role="UserReportsTable" EntitySet="UserReportsTables" />
+          </AssociationSet>
+          <AssociationSet Name="fk_adminunitroles" Association="Self.fk_adminunitroles">
+            <End Role="UnitTable" EntitySet="UnitTables" />
+            <End Role="UnitAdminTable" EntitySet="UnitAdminTables" />
+          </AssociationSet>
+          <AssociationSet Name="fk_useradminroleunit" Association="Self.fk_useradminroleunit">
+            <End Role="UsersTable" EntitySet="UsersTables" />
+            <End Role="UnitAdminTable" EntitySet="UnitAdminTables" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Usersreports" Association="Self.fk_Usersreports">
+            <End Role="UsersTable" EntitySet="UsersTables" />
+            <End Role="UserReportsTable" EntitySet="UserReportsTables" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UsersRolesidz" Association="Self.fk_UsersRolesidz">
+            <End Role="UsersTable" EntitySet="UsersTables" />
+            <End Role="UsersRolesTable" EntitySet="UsersRolesTables" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TMS_db1ModelStoreContainer" CdmEntityContainer="TMS_db1Entities">
+          <EntitySetMapping Name="GeneralToDoListTables">
+            <EntityTypeMapping TypeName="TMS_db1Model.GeneralToDoListTable">
+              <MappingFragment StoreEntitySet="GeneralToDoListTable">
+                <ScalarProperty Name="ToDoId" ColumnName="ToDoId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="TaskFeedBack" ColumnName="TaskFeedBack" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="IsTaskComplete" ColumnName="IsTaskComplete" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonalToDoListTables">
+            <EntityTypeMapping TypeName="TMS_db1Model.PersonalToDoListTable">
+              <MappingFragment StoreEntitySet="PersonalToDoListTable">
+                <ScalarProperty Name="PToDoListId" ColumnName="PToDoListId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="TaskFeedback" ColumnName="TaskFeedback" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolesTables">
+            <EntityTypeMapping TypeName="TMS_db1Model.RolesTable">
+              <MappingFragment StoreEntitySet="RolesTable">
+                <ScalarProperty Name="RolesId" ColumnName="RolesId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskTables">
+            <EntityTypeMapping TypeName="TMS_db1Model.TaskTable">
+              <MappingFragment StoreEntitySet="TaskTable">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="FeedBack" ColumnName="FeedBack" />
+                <ScalarProperty Name="BodyContent" ColumnName="BodyContent" />
+                <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
+                <ScalarProperty Name="TastStartTime" ColumnName="TastStartTime" />
+                <ScalarProperty Name="TaskEndTime" ColumnName="TaskEndTime" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitAdminTables">
+            <EntityTypeMapping TypeName="TMS_db1Model.UnitAdminTable">
+              <MappingFragment StoreEntitySet="UnitAdminTable">
+                <ScalarProperty Name="UnitAdminid" ColumnName="UnitAdminid" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitTables">
+            <EntityTypeMapping TypeName="TMS_db1Model.UnitTable">
+              <MappingFragment StoreEntitySet="UnitTable">
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserReportsTables">
+            <EntityTypeMapping TypeName="TMS_db1Model.UserReportsTable">
+              <MappingFragment StoreEntitySet="UserReportsTable">
+                <ScalarProperty Name="Reportid" ColumnName="Reportid" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="Report" ColumnName="Report" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersRolesTables">
+            <EntityTypeMapping TypeName="TMS_db1Model.UsersRolesTable">
+              <MappingFragment StoreEntitySet="UsersRolesTable">
+                <ScalarProperty Name="UsersRolesID" ColumnName="UsersRolesID" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="RolesId" ColumnName="RolesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersTables">
+            <EntityTypeMapping TypeName="TMS_db1Model.UsersTable">
+              <MappingFragment StoreEntitySet="UsersTable">
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

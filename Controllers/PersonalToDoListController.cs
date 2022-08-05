@@ -12,7 +12,7 @@ namespace TMS.Controllers
 {
     public class PersonalToDoListController : Controller
     {
-        private TMSEntities1 db = new TMSEntities1();
+        private TMS_db1Entities db = new TMS_db1Entities();
 
         // GET: PersonalToDoList
         public ActionResult Index()

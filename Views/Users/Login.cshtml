@@ -48,73 +48,83 @@
                 </div>
                 <div class="card-footer text-muted "> <a href="#" class="btn btn-outline-primary text-black">@ViewData["nowDt"]</a></div>
             </div>
- }
-        
-            <body>
-                <div class="main">
-                    <section class="sign-in">
-                        <div class="container">
-                            <div class="signin-content">
-                                <div class="signin-image">
-                                    <figure><img src="~/App_Start/Email/assets/img/pol.png" alt="sing up image" class="img-fluid m-10"></figure>
-                                    <a href="@Url.Action("Registration", "Users")" class="signup-image-link">Create an account</a>
-                                </div>
+        }
+        <div id="resultLoading" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 10000; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;">
+            <div style="width: 340px; height: 200px; text-align: center; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; z-index: 10; color: rgb(255, 255, 255);">
+                <div class="uil-default-css">
+                    <div class="loader">Loading...</div>
+                </div>
+                <div class="resultLoading" style="display: block; font-size: 18px; font-weight: 300;">&nbsp;</div>
+            </div>
+            <div style="background: rgb(0, 0, 0); opacity: 0.6; width: 100%; height: 100%; position: absolute; top: 0px;"></div>
+        </div>
 
-                                <div class="signin-form">
-                                    <h2 class="form-title ">TMS <br /> </h2>
+        <body>
 
-                                    <form>
+            <div class="main">
+                <section class="sign-in">
+                    <div class="container">
+                        <div class="signin-content">
+                            <div class="signin-image">
+                                <figure><img src="~/App_Start/Email/assets/img/pol.png" alt="sing up image" class="img-fluid m-10"></figure>
+                                <a href="@Url.Action("Registration", "Users")" class="signup-image-link">Create an account</a>
+                            </div>
 
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        <div class="form-group">
+                            <div class="signin-form">
+                                <h2 class="form-title ">TMS <br /> </h2>
 
-                                            <label><i class="fa-solid fa-envelope-circle-check pl-2"></i> </label>
-                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { id = "email", placeholder = "Your Email" } })
-                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                        </div>
-                                        <div class="form-group">
+                                <form>
 
-                                            <label>  <i class="fa-solid fa-key pl-2"></i></label>
-                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "passowrd" } })
-                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                @Html.EditorFor(model => model.RememberMe)
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
 
-                                                @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
-                                            </div>
-                                            <label><span><span></span></span>@Html.LabelFor(model => model.RememberMe, new { @class = "label-agree-term" })</label>
-
-                                        </div>
-
-                                        <!-- Submit button -->
-                                        <div class="form-group form-button">
-                                            <button type="submit" class=" btn btn-primary w-100">log In</button>
-                                        </div>
-                                        <span signup-image-link> <a href="@Url.Action("ForgotPassword", "Users")" class="signup-image-link"> Forgot Password?  RESET</a></span>
-                                    </form>
-                                    <div class="social-login">
-                                        <span class="social-label">Or login with</span>
-                                        <ul class="socials">
-                                            <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-                                            <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                                            <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
-                                        </ul>
+                                        <label><i class="fa-solid fa-envelope-circle-check pl-2"></i> </label>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { id = "email", placeholder = "Your Email" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                     </div>
+                                    <div class="form-group">
+
+                                        <label>  <i class="fa-solid fa-key pl-2"></i></label>
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "passowrd" } })
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.RememberMe)
+
+                                            @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label><span><span></span></span>@Html.LabelFor(model => model.RememberMe, new { @class = "label-agree-term" })</label>
+
+                                    </div>
+
+                                    <!-- Submit button -->
+                                    <div class="form-group form-button">
+                                        <button type="submit" class=" btn btn-primary w-100">log In</button>
+                                    </div>
+                                    <span signup-image-link> <a href="@Url.Action("ForgotPassword", "Users")" class="signup-image-link"> Forgot Password?  RESET</a></span>
+                                </form>
+                                <div class="social-login">
+                                    <span class="social-label">Or login with</span>
+                                    <ul class="socials">
+                                        <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                                        <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                                        <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
+            </div>
 
-            </body>
-        }
+        </body>
+    }
 
 
 
 
-    
+
 
 }
 else
@@ -171,7 +181,7 @@ else
 
 
 
-}
+
 </html>
 
         @section Scripts {

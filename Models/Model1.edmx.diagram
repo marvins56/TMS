@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="745404bd49304ecdabedbee6e37392e2" Name="Diagram1">
+        <EntityTypeShape EntityType="TMS_db1Model.GeneralToDoListTable" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMS_db1Model.PersonalToDoListTable" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMS_db1Model.RolesTable" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMS_db1Model.TaskTable" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMS_db1Model.UnitAdminTable" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMS_db1Model.UnitTable" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMS_db1Model.UserReportsTable" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMS_db1Model.UsersRolesTable" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMS_db1Model.UsersTable" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="TMS_db1Model.fk_TaskId_tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="TMS_db1Model.fk_unitdetails" ManuallyRouted="false" />
+        <AssociationConnector Association="TMS_db1Model.fk_usersdetails" ManuallyRouted="false" />
+        <AssociationConnector Association="TMS_db1Model.fk_UsersRolesidzwz" ManuallyRouted="false" />
+        <AssociationConnector Association="TMS_db1Model.fk_UnitId" ManuallyRouted="false" />
+        <AssociationConnector Association="TMS_db1Model.fk_UserIdz" ManuallyRouted="false" />
+        <AssociationConnector Association="TMS_db1Model.fk_Usersreportstasks" ManuallyRouted="false" />
+        <AssociationConnector Association="TMS_db1Model.fk_adminunitroles" ManuallyRouted="false" />
+        <AssociationConnector Association="TMS_db1Model.fk_useradminroleunit" ManuallyRouted="false" />
+        <AssociationConnector Association="TMS_db1Model.fk_Usersreports" ManuallyRouted="false" />
+        <AssociationConnector Association="TMS_db1Model.fk_UsersRolesidz" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

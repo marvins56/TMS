@@ -26,7 +26,15 @@
     <link rel="stylesheet" href="~/App_Start/authentication/css/style.css">
 </head>
 <body>
-
+    <div id="resultLoading" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 10000; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;">
+        <div style="width: 340px; height: 200px; text-align: center; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; z-index: 10; color: rgb(255, 255, 255);">
+            <div class="uil-default-css">
+                <div class="loader">Loading...</div>
+            </div>
+            <div class="resultLoading" style="display: block; font-size: 18px; font-weight: 300;">&nbsp;</div>
+        </div>
+        <div style="background: rgb(0, 0, 0); opacity: 0.6; width: 100%; height: 100%; position: absolute; top: 0px;"></div>
+    </div>
     @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
     {
 
@@ -47,7 +55,7 @@
     }
     else
     {
-        using (Html.BeginForm("Registration","Users",FormMethod.Post))
+        using (Html.BeginForm("Registration", "Users", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             <!-- Section: Design Block -->
@@ -65,66 +73,66 @@
                     </div>
                     <div class="card-footer text-muted "> <a href="#" class="btn btn-outline-primary text-black">@ViewData["nowDt"]</a></div>
                 </div> }
-           
-
-                <div class="main">
-                    <!-- Sign up form -->
-                    <section class="signup">
-                        <div class="container">
-                            <div class="signup-content">
-                                <div class="signup-form">
-                                    <h2 class="form-title"> <a class="navbar-brand brand-logo-mini" href="@Url.Action("Registration", "Users")"><img src="~/App_Start/Email/assets/img/pol.png" class="mr-2" alt="logo" style="width:20%" />TMS</a></h2>
-                                    <form>
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        <div class="form-group">
-
-                                            <label for="name"><i class="zmdi zmdi-account material-icons-name pl-2"></i></label>
-                                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { id = "name", placeholder = "Username" } })
-
-                                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-                                        </div>
-                                        <div class="form-group">
-
-                                            <label><i class="fa-solid fa-envelope-circle-check pl-2"></i> </label>
-                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { id = "email", placeholder = "Your Email" } })
-                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                        </div>
-                                        <div class="form-group">
-
-                                            <label><i class="fa-solid fa-calendar-days pl-2"></i> </label>
-                                            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { placeholder = "Date of birth" } })
-                                            @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
-                                        </div>
-                                        <div class="form-group">
-
-                                            <label>  <i class="fa-solid fa-key pl-2"></i></label>
-                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "password" } })
-                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                        </div>
 
 
-                                        <div class="form-group">
+            <div class="main">
+                <!-- Sign up form -->
+                <section class="signup">
+                    <div class="container">
+                        <div class="signup-content">
+                            <div class="signup-form">
+                                <h2 class="form-title"> <a class="navbar-brand brand-logo-mini" href="@Url.Action("Registration", "Users")"><img src="~/App_Start/Email/assets/img/pol.png" class="mr-2" alt="logo" style="width:20%" />TMS</a></h2>
+                                <form>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
 
-                                            <label>  <i class="fa-solid fa-key pl-2"></i></label>
-                                            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { placeholder = " Confirm password" } })
-                                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                                        </div>
+                                        <label for="name"><i class="zmdi zmdi-account material-icons-name pl-2"></i></label>
+                                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { id = "name", placeholder = "Username" } })
+
+                                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label><i class="fa-solid fa-envelope-circle-check pl-2"></i> </label>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { id = "email", placeholder = "Your Email" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label><i class="fa-solid fa-calendar-days pl-2"></i> </label>
+                                        @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { placeholder = "Date of birth" } })
+                                        @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label>  <i class="fa-solid fa-key pl-2"></i></label>
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "password" } })
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    </div>
 
 
-                                        <div class="form-group form-button">
-                                            <button type="submit" class=" btn btn-primary w-100">Sign up</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="signup-image">
-                                    <figure><img src="~/App_Start/Email/assets/img/pol.png" alt="sing up image" class="img-fluid m-10"></figure>
-                                    <a href="@Url.Action("Login", "Users")" class="signup-image-link">I am already member</a>
-                                </div>
+                                    <div class="form-group">
+
+                                        <label>  <i class="fa-solid fa-key pl-2"></i></label>
+                                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { placeholder = " Confirm password" } })
+                                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                    </div>
+
+
+                                    <div class="form-group form-button">
+                                        <button type="submit" class=" btn btn-primary w-100">Sign up</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="signup-image">
+                                <figure><img src="~/App_Start/Email/assets/img/pol.png" alt="sing up image" class="img-fluid m-10"></figure>
+                                <a href="@Url.Action("Login", "Users")" class="signup-image-link">I am already member</a>
                             </div>
                         </div>
-                    </section>
-                </div>
-           
+                    </div>
+                </section>
+            </div>
+
 
 
         }

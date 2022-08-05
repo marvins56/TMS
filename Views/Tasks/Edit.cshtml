@@ -2,33 +2,41 @@
 
 
 @{
-
+    <div id="resultLoading" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 10000; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;">
+        <div style="width: 340px; height: 200px; text-align: center; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; z-index: 10; color: rgb(255, 255, 255);">
+            <div class="uil-default-css">
+                <div class="loader">Loading...</div>
+            </div>
+            <div class="resultLoading" style="display: block; font-size: 18px; font-weight: 300;">&nbsp;</div>
+        </div>
+        <div style="background: rgb(0, 0, 0); opacity: 0.6; width: 100%; height: 100%; position: absolute; top: 0px;"></div>
+    </div>
     //error handling
 
     if (TempData["savingerror"] != null)
     {
-    <div class="card text-center  mt-100">
-        <div class="card-header bg-danger text-white">Notification</div>
-        <div class="card-body">
-            <h5 class="card-title "> ERROR WHILE SAVING</h5>
-            <p class="card-text">  @TempData["savingerror"]</p>
+        <div class="card text-center  mt-100">
+            <div class="card-header bg-danger text-white">Notification</div>
+            <div class="card-body">
+                <h5 class="card-title "> ERROR WHILE SAVING</h5>
+                <p class="card-text">  @TempData["savingerror"]</p>
+
+            </div>
+
+            @if (Session["urserrole"].Equals(2))
+            {
+                <a href="@Url.Action("unittasks","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
+            }
+            else if (Session["urserrole"].Equals(5))
+            {
+                <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
+            }
+            else
+            {
+                <a href="@Url.Action("Mytask","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
+            }
 
         </div>
-
-        @if (Session["urserrole"].Equals(2))
-        {
-            <a href="@Url.Action("unittasks","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
-        }
-        else if (Session["urserrole"].Equals(5))
-        {
-             <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
-        }
-        else 
-        {
-             <a href="@Url.Action("Mytask","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
-        }
-
-    </div>
 
     }
     else
@@ -50,7 +58,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-horizontal">
-                                 
+
                                     <hr />
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     @Html.HiddenFor(model => model.TaskId)

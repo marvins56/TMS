@@ -3,7 +3,15 @@
 @{
     ViewBag.Title = "Details";
 }
-
+<div id="resultLoading" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 10000; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;">
+    <div style="width: 340px; height: 200px; text-align: center; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; z-index: 10; color: rgb(255, 255, 255);">
+        <div class="uil-default-css">
+            <div class="loader">Loading...</div>
+        </div>
+        <div class="resultLoading" style="display: block; font-size: 18px; font-weight: 300;">&nbsp;</div>
+    </div>
+    <div style="background: rgb(0, 0, 0); opacity: 0.6; width: 100%; height: 100%; position: absolute; top: 0px;"></div>
+</div>
 
 
 <div class="jumbotron">
@@ -64,11 +72,11 @@
                     <a class="btn btn-primary" href=" @Url.Action("Edit", "Tasks", new { id = Model.TaskId })"> Edit </a>
                     @if (Session["urserrole"].Equals(2))
                     {
-                         <a href="@Url.Action("unittasks","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
+                        <a href="@Url.Action("unittasks","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
                     }
                     else if (Session["urserrole"].Equals(5))
                     {
-                         <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
+                        <a href="@Url.Action("Index","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
                     }
                     else
                     {
@@ -80,7 +88,7 @@
 
         </div>
         <div class="card-footer text-muted">
-            @{ 
+            @{
                 var timer = @Html.DisplayFor(model => model.TaskEndTime);
             }
             <a href="https://logwork.com/countdown-7k4v" class="countdown-timer text-primary" data-style="circles" data-textcolor="#39574c" data-timezone="Africa/Kampala" data-date=@timer>c</a>

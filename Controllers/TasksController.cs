@@ -15,7 +15,7 @@ namespace TMS.Controllers
     [HandleError]
     public class TasksController : Controller
     {
-        private TMSEntities1 db = new TMSEntities1();
+        private TMS_db1Entities db = new TMS_db1Entities();
 
         // GET: Tasks
         public ActionResult Index()

@@ -11,38 +11,16 @@ namespace TMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class GeneralToDoListTable
     {
         public int ToDoId { get; set; }
-        [Display(Name="User Name")]
         public int UserName { get; set; }
-        [Display(Name = "Task Name")]
-        [DataType(DataType.MultilineText)]
-        [MaxLength(20, ErrorMessage = "please give a shorter sentence")]
-        [MinLength(6, ErrorMessage = "minimum characters are 6 please try again")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = " TaskName field required")]
         public string TaskName { get; set; }
-        [Display(Name = "Task FeedBack ")]
-        [DataType(DataType.MultilineText)]
-        [MaxLength(20, ErrorMessage = "please give a shorter sentence")]
-        [MinLength(6, ErrorMessage = "minimum characters are 6 please try again")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = " TaskFeedBack field required")]
         public string TaskFeedBack { get; set; }
-        [Display(Name = "Task Refrence ")]
-        
         public int TaskId { get; set; }
-        [Display(Name = "Task Status ")]
         public bool IsTaskComplete { get; set; }
-        [Display(Name = "User Unit ")]
         public int UnitId { get; set; }
-
-        [Display(Name = "Task deadline ")]
-        [DataType(DataType.Date)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = " deadline field required")]
-        
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime CompletionDate { get; set; }
     
         public virtual TaskTable TaskTable { get; set; }

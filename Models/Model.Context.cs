@@ -13,10 +13,10 @@ namespace TMS.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TMSEntities1 : DbContext
+    public partial class TMS_db1Entities : DbContext
     {
-        public TMSEntities1()
-            : base("name=TMSEntities1")
+        public TMS_db1Entities()
+            : base("name=TMS_db1Entities")
         {
         }
     
@@ -27,12 +27,12 @@ namespace TMS.Models
     
         public virtual DbSet<GeneralToDoListTable> GeneralToDoListTables { get; set; }
         public virtual DbSet<PersonalToDoListTable> PersonalToDoListTables { get; set; }
-        public virtual DbSet<TaskTable> TaskTables { get; set; }
-        public virtual DbSet<UnitTable> UnitTables { get; set; }
         public virtual DbSet<RolesTable> RolesTables { get; set; }
-        public virtual DbSet<UsersTable> UsersTables { get; set; }
-        public virtual DbSet<UsersRolesTable> UsersRolesTables { get; set; }
-        public virtual DbSet<UserReportsTable> UserReportsTables { get; set; }
+        public virtual DbSet<TaskTable> TaskTables { get; set; }
         public virtual DbSet<UnitAdminTable> UnitAdminTables { get; set; }
+        public virtual DbSet<UnitTable> UnitTables { get; set; }
+        public virtual DbSet<UserReportsTable> UserReportsTables { get; set; }
+        public virtual DbSet<UsersRolesTable> UsersRolesTables { get; set; }
+        public virtual DbSet<UsersTable> UsersTables { get; set; }
     }
 }

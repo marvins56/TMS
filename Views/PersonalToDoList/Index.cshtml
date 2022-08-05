@@ -3,6 +3,16 @@
 @{
     ViewBag.Title = "Index";
 }
+
+<div id="resultLoading" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 10000; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;">
+    <div style="width: 340px; height: 200px; text-align: center; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; z-index: 10; color: rgb(255, 255, 255);">
+        <div class="uil-default-css">
+            <div class="loader">Loading...</div>
+        </div>
+        <div class="resultLoading" style="display: block; font-size: 18px; font-weight: 300;">&nbsp;</div>
+    </div>
+    <div style="background: rgb(0, 0, 0); opacity: 0.6; width: 100%; height: 100%; position: absolute; top: 0px;"></div>
+</div>
 <div class="jumbotron text-center">
     <h1 class="display-4">PERSONAL TODOLIST</h1>
     <p class="lead ">Allows you track your daily progress and activities to accomplish</p>
@@ -15,7 +25,7 @@
         <div class="card">
             <div class="card-body">
                 <p class="card-title">
-                       <a href="@Url.Action("Create","PersonalToDoList")" class="btn btn-social-icon btn-outline-primary float-right">
+                    <a href="@Url.Action("Create","PersonalToDoList")" class="btn btn-social-icon btn-outline-primary float-right">
                         <i class="fa-solid fa-plus fa-4x pt-3"></i>
 
                     </a>
@@ -24,7 +34,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
-                            <table  class="display expandable-table" style="width:100%">
+                            <table class="display expandable-table" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>
@@ -60,17 +70,17 @@
                                                     <i class="fa-solid fa-pen-to-square menu-icon "></i>
 
                                                 </a>
-                                           
+
                                                 <a class=" btn btn-outline-dark " href="@Url.Action("Details", "PersonalToDoList", new { id = item.PToDoListId })">
                                                     <i class="fa-solid fa-eye  menu-icon"></i>
 
                                                 </a>
-                                           
+
                                                 <a class=" btn btn-outline-danger" href="@Url.Action("Delete", "PersonalToDoList", new { id = item.PToDoListId })">
                                                     <i class="fa-solid fa-trash-can c "></i>
 
                                                 </a>
-                                            
+
                                             </td>
                                         </tr>
                                     }

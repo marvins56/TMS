@@ -540,7 +540,7 @@ namespace TMS.Controllers
             //var scheme = Request.Url.Scheme;
             //var host = Request.Url.Host;
             //var port = Request.Url.Port;    
-            var verifyUrl = "/Users/" + emailFor + "/" + activationCode;
+            var verifyUrl = "https://tmsapp1.azurewebsites.net/Users/" + emailFor + "/" + activationCode;
             var link = verifyUrl;
             var fromEmail = new MailAddress("testmarvinug@gmail.com", "test asp");
             var toEmail = new MailAddress(emailId);

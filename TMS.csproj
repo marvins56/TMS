@@ -1955,6 +1955,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="database backup\TMS.bak" />
     <Content Include="App_Start\images\report_documents\Usermanual.pdf" />
+    <None Include="Properties\PublishProfiles\TMS20220804174555 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\TMSapp1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<TMS.Models.TaskTable>
 
-
-
 @if (TempData["sessiondataaccess"] != null)
 {
     <div class="card text-center  mt-100">
@@ -52,10 +50,7 @@ else
                    <a href="@Url.Action("Mytask","Tasks")" class="btn btn-outline-primary text-black"> BACK </a>
 
                 }
-
-
             </div>
-
         }
         else
         {
@@ -107,8 +102,6 @@ else
                                             <tbody>
                                                 @foreach (var item in Model)
                                                 {
-
-
                                                     <tr>
 
                                                         <td>
@@ -204,9 +197,6 @@ else
                 <div class="card-footer text-muted"> <a href="@Url.Action("Mytask", "Tasks")" class="btn btn-outline-primary text-black"> BACK </a></div>
 
             }
-
-
-
 
         </div>
 

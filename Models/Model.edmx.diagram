@@ -4,27 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8c341bf485274f55b95a95445bd93ab2" Name="Diagram1">
-        <EntityTypeShape EntityType="TMS_db1Model.GeneralToDoListTable" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TMS_db1Model.PersonalToDoListTable" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TMS_db1Model.RolesTable" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TMS_db1Model.TaskTable" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TMS_db1Model.UnitAdminTable" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TMS_db1Model.UnitTable" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TMS_db1Model.UserReportsTable" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TMS_db1Model.UsersRolesTable" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TMS_db1Model.UsersTable" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
-        <AssociationConnector Association="TMS_db1Model.fk_TaskId_tasks" ManuallyRouted="false" />
-        <AssociationConnector Association="TMS_db1Model.fk_unitdetails" ManuallyRouted="false" />
-        <AssociationConnector Association="TMS_db1Model.fk_usersdetails" ManuallyRouted="false" />
-        <AssociationConnector Association="TMS_db1Model.fk_UsersRolesidzwz" ManuallyRouted="false" />
-        <AssociationConnector Association="TMS_db1Model.fk_UnitId" ManuallyRouted="false" />
-        <AssociationConnector Association="TMS_db1Model.fk_UserIdz" ManuallyRouted="false" />
-        <AssociationConnector Association="TMS_db1Model.fk_Usersreportstasks" ManuallyRouted="false" />
-        <AssociationConnector Association="TMS_db1Model.fk_adminunitroles" ManuallyRouted="false" />
-        <AssociationConnector Association="TMS_db1Model.fk_useradminroleunit" ManuallyRouted="false" />
-        <AssociationConnector Association="TMS_db1Model.fk_Usersreports" ManuallyRouted="false" />
-        <AssociationConnector Association="TMS_db1Model.fk_UsersRolesidz" ManuallyRouted="false" />
+      <Diagram DiagramId="ee3d8eef2d054770b547c039fd515399" Name="Diagram1">
+        <EntityTypeShape EntityType="TMSModel.GeneralToDoListTable" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.PersonalToDoListTable" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.RolesTable" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TaskTable" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.UnitAdminTable" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.UnitTable" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.UserReportsTable" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.UsersRolesTable" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.UsersTable" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="TMSModel.fk_TaskId_tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.fk_unitdetails" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.fk_usersdetails" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.fk_UsersRolesidzwz" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.fk_UnitId" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.fk_UserIdz" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.fk_Usersreportstasks" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.fk_adminunitroles" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.fk_useradminroleunit" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.fk_Usersreports" ManuallyRouted="false" />
+        <AssociationConnector Association="TMSModel.fk_UsersRolesidz" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -13,10 +13,10 @@ namespace TMS.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TMS_db1Entities : DbContext
+    public partial class TMSEntities : DbContext
     {
-        public TMS_db1Entities()
-            : base("name=TMS_db1Entities")
+        public TMSEntities()
+            : base("name=TMSEntities")
         {
         }
     

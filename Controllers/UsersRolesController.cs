@@ -12,7 +12,7 @@ namespace TMS.Controllers
 {
     public class UsersRolesController : Controller
     {
-        private TMS_db1Entities db = new TMS_db1Entities();
+        private TMSEntities db = new TMSEntities();
 
         // GET: UsersRoles
         public ActionResult Index()

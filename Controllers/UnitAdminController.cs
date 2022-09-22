@@ -12,7 +12,7 @@ namespace TMS.Controllers
 {
     public class UnitAdminController : Controller
     {
-        private TMS_db1Entities db = new TMS_db1Entities();
+        private TMSEntities db = new TMSEntities();
 
         // GET: UnitAdmin
         public ActionResult Index()

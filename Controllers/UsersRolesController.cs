@@ -12,7 +12,7 @@ namespace TMS.Controllers
 {
     public class UsersRolesController : Controller
     {
-        private TMS_db1Entities db = new TMS_db1Entities();
+        private TMSEntities db = new TMSEntities();
 
         // GET: UsersRoles
         public ActionResult Index()
@@ -100,9 +100,6 @@ namespace TMS.Controllers
             return View(usersRolesTable);
         }
 
-        // POST: UsersRoles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UsersRolesID,Userid,RolesId")] UsersRolesTable usersRolesTable)

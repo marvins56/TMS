@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TMS_db1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="GeneralToDoListTable">
           <Key>
             <PropertyRef Name="ToDoId" />
@@ -226,7 +226,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TMS_db1ModelStoreContainer">
+        <EntityContainer Name="TMSModelStoreContainer">
           <EntitySet Name="GeneralToDoListTable" EntityType="Self.GeneralToDoListTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonalToDoListTable" EntityType="Self.PersonalToDoListTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolesTable" EntityType="Self.RolesTable" Schema="dbo" store:Type="Tables" />
@@ -285,7 +285,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TMS_db1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="TMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="GeneralToDoListTable">
           <Key>
             <PropertyRef Name="ToDoId" />
@@ -529,7 +529,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TMS_db1Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TMSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="GeneralToDoListTables" EntityType="Self.GeneralToDoListTable" />
           <EntitySet Name="PersonalToDoListTables" EntityType="Self.PersonalToDoListTable" />
           <EntitySet Name="RolesTables" EntityType="Self.RolesTable" />
@@ -589,9 +589,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TMS_db1ModelStoreContainer" CdmEntityContainer="TMS_db1Entities">
+        <EntityContainerMapping StorageEntityContainer="TMSModelStoreContainer" CdmEntityContainer="TMSEntities">
           <EntitySetMapping Name="GeneralToDoListTables">
-            <EntityTypeMapping TypeName="TMS_db1Model.GeneralToDoListTable">
+            <EntityTypeMapping TypeName="TMSModel.GeneralToDoListTable">
               <MappingFragment StoreEntitySet="GeneralToDoListTable">
                 <ScalarProperty Name="ToDoId" ColumnName="ToDoId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -605,7 +605,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PersonalToDoListTables">
-            <EntityTypeMapping TypeName="TMS_db1Model.PersonalToDoListTable">
+            <EntityTypeMapping TypeName="TMSModel.PersonalToDoListTable">
               <MappingFragment StoreEntitySet="PersonalToDoListTable">
                 <ScalarProperty Name="PToDoListId" ColumnName="PToDoListId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -615,7 +615,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RolesTables">
-            <EntityTypeMapping TypeName="TMS_db1Model.RolesTable">
+            <EntityTypeMapping TypeName="TMSModel.RolesTable">
               <MappingFragment StoreEntitySet="RolesTable">
                 <ScalarProperty Name="RolesId" ColumnName="RolesId" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
@@ -623,7 +623,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaskTables">
-            <EntityTypeMapping TypeName="TMS_db1Model.TaskTable">
+            <EntityTypeMapping TypeName="TMSModel.TaskTable">
               <MappingFragment StoreEntitySet="TaskTable">
                 <ScalarProperty Name="TaskId" ColumnName="TaskId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -638,7 +638,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UnitAdminTables">
-            <EntityTypeMapping TypeName="TMS_db1Model.UnitAdminTable">
+            <EntityTypeMapping TypeName="TMSModel.UnitAdminTable">
               <MappingFragment StoreEntitySet="UnitAdminTable">
                 <ScalarProperty Name="UnitAdminid" ColumnName="UnitAdminid" />
                 <ScalarProperty Name="Userid" ColumnName="Userid" />
@@ -647,7 +647,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UnitTables">
-            <EntityTypeMapping TypeName="TMS_db1Model.UnitTable">
+            <EntityTypeMapping TypeName="TMSModel.UnitTable">
               <MappingFragment StoreEntitySet="UnitTable">
                 <ScalarProperty Name="UnitId" ColumnName="UnitId" />
                 <ScalarProperty Name="UnitName" ColumnName="UnitName" />
@@ -655,7 +655,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserReportsTables">
-            <EntityTypeMapping TypeName="TMS_db1Model.UserReportsTable">
+            <EntityTypeMapping TypeName="TMSModel.UserReportsTable">
               <MappingFragment StoreEntitySet="UserReportsTable">
                 <ScalarProperty Name="Reportid" ColumnName="Reportid" />
                 <ScalarProperty Name="Userid" ColumnName="Userid" />
@@ -666,7 +666,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UsersRolesTables">
-            <EntityTypeMapping TypeName="TMS_db1Model.UsersRolesTable">
+            <EntityTypeMapping TypeName="TMSModel.UsersRolesTable">
               <MappingFragment StoreEntitySet="UsersRolesTable">
                 <ScalarProperty Name="UsersRolesID" ColumnName="UsersRolesID" />
                 <ScalarProperty Name="Userid" ColumnName="Userid" />
@@ -675,7 +675,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UsersTables">
-            <EntityTypeMapping TypeName="TMS_db1Model.UsersTable">
+            <EntityTypeMapping TypeName="TMSModel.UsersTable">
               <MappingFragment StoreEntitySet="UsersTable">
                 <ScalarProperty Name="Userid" ColumnName="Userid" />
                 <ScalarProperty Name="Username" ColumnName="Username" />

@@ -1,0 +1,373 @@
+﻿
+@{
+    ViewBag.Title = "calendar";
+}
+
+@{
+    Layout = "~/Views/Shared/Eventslayout.cshtml";
+}
+
+
+
+@{
+    if (Session["userid"] != null)
+    {
+        if (TempData["error"] != null)
+        {
+            <script>
+     swal({
+        title: "ERROR",
+  text: "@TempData["error"]",
+  icon: "error"
+        });
+            </script>
+        }
+        else if (TempData["success"] != null)
+        {
+            <script>
+     swal({
+        title: "",
+  text: "@TempData["success"]",
+         icon: "success"
+        });
+            </script>
+        }
+        if (Session["userroles"].ToString() == "ADMINISTRATOR" || Session["userroles"].ToString() == "SUPER ADMINISTRATOR")
+        {
+            <div class="card  mb-3">
+                <div class="card-header">
+                    WELCOME @Session["userid"]
+                </div>
+                <div class="card-body ">
+                    <h5 class="card-title">DETAILS VIEW OF THE STUDENT TRAVEL SCHEDULES</h5>
+                    <p class="card-text"></p>
+
+                </div>
+            </div>
+            <div id="calender"></div>
+            
+            <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
+                <div class="modal-dialog">
+                    <form class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="backDropModalTitle">TRAVEL SHEDULE</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    Shedule details
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <p id="pDetails"></p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                @*<button id="btnDelete" class="btn btn-default btn-sm pull-right">
+                                        <span class="glyphicon glyphicon-remove"></span> Remove
+                                    </button>*@
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                                Close
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+            <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+            @section Scripts{
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+                <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        var events = [];
+                        var selectedEvent = null;
+                        FetchEventAndRenderCalendar();
+                        function FetchEventAndRenderCalendar() {
+                            events = [];
+                            $.ajax({
+                                type: "GET",
+                                url: "/Tasks/GetEvents",
+                                success: function (data) {
+                                    $.each(data, function (i, v) {
+                                        events.push({
+                                            eventID: v.TaskId,
+                                            title: v.TaskName,
+                                            description: v.BodyContent,
+                                            start: moment(v.TastStartTime),
+                                            end: v.TaskEndTime != null ? moment(v.TaskEndTime) : null,
+                                            color: v.ThemeColor,
+                                           
+                                            userid: v.UserId,
+                                        });
+                                    })
+
+                                    GenerateCalender(events);
+                                },
+                                error: function (error) {
+                                    swal({
+                                        title: "ERROR",
+                                        text: "OPERATION FAILED",
+                                        icon: "error"
+                                    });
+                                }
+                            })
+                        }
+
+                        function GenerateCalender(events) {
+                            $('#calender').fullCalendar('destroy');
+                            $('#calender').fullCalendar({
+                                eventAfterRender: function (event, element, view) {
+                                    /*$(element).css('padding', '2'),*/
+                                    $(element).css('color', 'white');
+                                },
+                                contentHeight: 600,
+                                defaultDate: new Date(),
+                                timeFormat: 'h(:mm)a',
+                                header: {
+                                    left: 'prev,next today',
+                                    center: 'title',
+                                    right: 'month,basicWeek,basicDay,agenda'
+                                },
+                                eventLimit: true,
+                                eventColor: '#002B5B',
+                                events: events,
+                                eventClick: function (calEvent, jsEvent, view) {
+                                    selectedEvent = calEvent;
+                                    $('#backDropModal #eventTitle').text(calEvent.title);
+                                    var $description = $('<div/>');
+                                    $description.append($('<p/>').html('<b>START OFF DATE:</b>' + calEvent.TastStartTime.format("DD-MMM-YYYY HH:mm a")));
+                                    if (calEvent.end != null) {
+                                        $description.append($('<p/>').html('<b>END TIME:</b>' + calEvent.TaskEndTime.format("DD-MMM-YYYY HH:mm a")));
+                                    }
+                                    $description.append($('<p/>').html('<b>Description:</b>' + calEvent.TaskName));
+                                    $('#backDropModal #pDetails').empty().html($description);
+
+                                    $('#backDropModal').modal();
+                                }, eventMouseover: function (calEvent, jsEvent) {
+                                    var tooltip = '<div class="tooltipevent"  style="width:20%;  padding:10px;border-radius:8px;  height:auto;background:#A62349;position:absolute;z-index:10001; color:white"> STUDENT:' + calEvent.UserId + ' </br>' + calEvent.BodyContent + '</div>';
+                                    var $tooltip = $(tooltip).appendTo('body');
+
+                                    $(this).mouseover(function (e) {
+                                        $(this).css('z-index', 10000);
+                                        $tooltip.fadeIn('500');
+                                        $tooltip.fadeTo('10', 1.9);
+                                    }).mousemove(function (e) {
+                                        $tooltip.css('top', e.pageY + 10);
+                                        $tooltip.css('left', e.pageX + 20);
+                                    });
+                                },
+
+                                eventMouseout: function (calEvent, jsEvent) {
+                                    $(this).css('z-index', 8);
+                                    $('.tooltipevent').remove();
+                                },
+                                selectable: true,
+                                select: function (start, end) {
+                                    selectedEvent = {
+                                        /*eventID: 0,*/
+                                        title: '',
+                                        description: '',
+                                        start: TastStartTime,
+                                        end: TaskEndTime,
+                                        allDay: false,
+                                        color: ''
+                                    };
+                                    openAddEditForm();
+                                    $('#calendar').fullCalendar('unselect');
+                                },
+                                editable: false,
+                                eventDrop: function (event) {
+                                    var data = {
+                                        EventID: event.TaskId,
+                                        Subject: event.TaskName,
+                                        Start: event.TastStartTime.format('DD/MM/YYYY HH:mm:ss'),
+                                        End: event.TaskEndTime != null ? event.TaskEndTime.format('DD/MM/YYYY HH:mm:ss') : null,
+                                        Description: event.BodyContent,
+                                        ThemeColor: event.color
+                                       
+                                    };
+                                    SaveEvent(data);
+                                }
+                            })
+                        }
+
+                        //$('#btnEdit').click(function () {
+                        //    //Open modal dialog for edit event
+                        //    openAddEditForm();
+                        //})
+                        $('#btnDelete').click(function () {
+                            if (selectedEvent != null && confirm('Are you sure?')) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: '/Events/DeleteEvent',
+                                    data: { 'eventID': selectedEvent.eventID },
+                                    success: function (data) {
+                                        if (data.status) {
+                                            //Refresh the calender
+                                            FetchEventAndRenderCalendar();
+                                            $('#backDropModal').modal('hide');
+                                            swal({
+                                                title: "SUCCESSFULL OPERATION",
+                                                text: "SUCCESS",
+                                                icon: "success"
+                                            });
+                                        }
+                                    },
+                                    error: function () {
+                                        swal({
+                                            title: "ERROR",
+                                            text: "OPERATION FAILED",
+                                            icon: "error"
+                                        });
+                                    }
+                                })
+                            }
+                        })
+                        //$('#dtp1,#dtp2').datetimepicker({
+                        //    format: 'DD/MM/YYYY HH:mm:ss'
+                        //});
+                        //$('#chkIsFullDay').change(function () {
+                        //    if ($(this).is(':checked')) {
+                        //        $('#divEndDate').hide();
+                        //    }
+                        //    else {
+                        //        $('#divEndDate').show();
+                        //    }
+                        //});
+                        //function openAddEditForm() {
+                        //    if (selectedEvent != null) {
+                        //        $('#hdEventID').val(selectedEvent.eventID);
+                        //        $('#txtSubject').val(selectedEvent.title);
+                        //        $('#txtStart').val(selectedEvent.start.format('DD/MM/YYYY HH:mm:ss'));
+                        //        $('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
+                        //        $('#chkIsFullDay').change();
+                        //        $('#txtEnd').val(selectedEvent.end != null ? selectedEvent.end.format('DD/MM/YYYY HH:mm:ss') : '');
+                        //        $('#txtDescription').val(selectedEvent.description);
+                        //        $('#ddThemeColor').val(selectedEvent.color);
+                        //    }
+                        //    $('#backDropModal').modal('hide');
+                        //    $('#myModalSave').modal();
+                        //}
+                        /*  $('#btnSave').click(function () {*/
+                        //Validation/
+                        //if ($('#txtSubject').val().trim() == "") {
+                        //    swal({
+                        //        title: "ERROR",
+                        //        text: "SUBJECT REQUIRED",
+                        //        icon: "error"
+                        //    });
+                        //    return;
+                        //}
+                        //if ($('#txtStart').val().trim() == "") {
+                        //    swal({
+                        //        title: "ERROR",
+                        //        text: "INVALID START DATE FORMAT",
+                        //        icon: "error"
+                        //    });
+                        //    return;
+                        //}
+                        //if ($('#chkIsFullDay').is(':checked') == false && $('#txtEnd').val().trim() == "") {
+                        //    swal({
+                        //        title: "ERROR",
+                        //        text: "INVALID END DATE FORMAT",
+                        //        icon: "error"
+                        //    });
+                        //    return;
+                        /*}*/
+                        //else {
+                        //    var startDate = moment($('#txtStart').val(), "DD/MM/YYYY HH:mm:ss").toDate();
+                        //    var endDate = moment($('#txtEnd').val(), "DD/MM/YYYY HH:mm:ss").toDate();
+                        //    if (startDate > endDate) {
+                        //        swal({
+                        //            title: "ERROR",
+                        //            text: "INVALID DATE FORMAT",
+                        //            icon: "error"
+                        //        });
+                        //        return;
+                        //    }
+                        //}
+
+                        //var data = {
+                        //    /* EventID: $('#hdEventID').val(),*/
+                        //    Subject: $('#txtSubject').val().trim(),
+                        //    Start: $('#txtStart').val().trim(),
+                        //    End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
+                        //    Description: $('#txtDescription').val(),
+                        //    ThemeColor: $('#ddThemeColor').val(),
+                        //    IsFullDay: $('#chkIsFullDay').is(':checked')
+                        //}
+                        //SaveEvent(data);
+                        //// call function for submit data to the server
+                        /* })*/
+                        //function SaveEvent(data) {
+                        //    $.ajax({
+                        //        type: "POST",
+                        //        url: '/Events/SaveEvent',
+                        //        data: data,
+                        //        success: function (data) {
+                        //            if (data.status) {
+                        //                //Refresh the calender
+                        //                FetchEventAndRenderCalendar();
+                        //                $('#myModalSave').modal('hide');
+                        //            }
+                        //        },
+                        //        error: function () {
+                        //            swal({
+                        //                title: "ERROR",
+                        //                text: "OPERATION FAILED",
+                        //                icon: "error"
+                        //            });
+                        //        }
+                        //    })
+                        //}
+                    })
+                </script>
+            }
+        }
+
+        else
+        {
+            <script>
+                swal({
+                    title: "NOT AUTHORISED",
+                    text: "ACCESSDE DENIED",
+                    icon: "error"
+                });</script>
+
+        }
+
+
+    }
+    else
+    {
+        <script>
+            swal({
+                title: "NOT AUTHORISED",
+                text: "ACCESS DENIED",
+                icon: "error"
+            });</script>
+
+    }
+}
+
+
